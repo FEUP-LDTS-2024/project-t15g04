@@ -12,23 +12,25 @@ public class Game {
     // so if we want to start new level (ex. 1, 2 3...)
     // the game will make copy from the resources and operate on the copy
     private int level;
+    private State state;
 
-    public Game(){
-        try {
-            TerminalSize terminalSize = new TerminalSize(40, 20);
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            Terminal terminal = terminalFactory.createTerminal();
-            screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null); // we don't need a cursor
-            screen.startScreen();           // screens must be started
-            screen.doResizeIfNecessary();   // resize screen if necessary
-            level = 1;
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws IOException {
+        init();
+        while(true){
+            state.draw();
+            state.upodate();
         }
     }
 
-    public void run(){
+    public Game(){
+        //this.level = 1;
+    }
+
+    public void init(){
+        //this.state() = new state(1);
+    }
+
+    public void update(){
         // TO DO
     }
 }
