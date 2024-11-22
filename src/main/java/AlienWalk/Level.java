@@ -1,3 +1,9 @@
+package AlienWalk;
+
+import AlienWalk.Elements.Alien;
+import AlienWalk.Elements.Monster;
+import AlienWalk.Elements.Tile;
+
 import java.util.List;
 
 public class Level {

@@ -1,3 +1,5 @@
+package AlienWalk.Elements;
+
 public class Element {
     private Position position;
 

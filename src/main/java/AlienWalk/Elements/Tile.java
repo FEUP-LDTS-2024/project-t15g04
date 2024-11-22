@@ -1,3 +1,5 @@
+package AlienWalk.Elements;
+
 public class Tile extends Element{
 
     public Tile(int  x, int y){

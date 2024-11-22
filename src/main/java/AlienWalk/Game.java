@@ -1,8 +1,7 @@
-import com.googlecode.lanterna.TerminalSize;
+package AlienWalk;
+
+import AlienWalk.States.State;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
 
@@ -15,6 +14,15 @@ public class Game {
     private State state;
 
     public static void main(String[] args) throws IOException {
+        Game game = new Game();
+        game.run();
+    }
+
+    public Game(){
+        //this.level = 1;
+    }
+
+    public void run(){
         init();
         while(true){
             state.draw();
@@ -22,15 +30,7 @@ public class Game {
         }
     }
 
-    public Game(){
-        //this.level = 1;
-    }
-
     public void init(){
         //this.state() = new state(1);
-    }
-
-    public void update(){
-        // TO DO
     }
 }
