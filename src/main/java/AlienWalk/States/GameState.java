@@ -1,6 +1,7 @@
 package AlienWalk.States;
 
 import AlienWalk.Controller.GameController;
+import AlienWalk.Game;
 import AlienWalk.Model.Level;
 import AlienWalk.Viewer.GameViewer;
 
@@ -10,7 +11,7 @@ public class GameState extends State<Level>{
     }
 
     @Override
-    public void step() {
+    public void step(Game game) {
 
     }
 }

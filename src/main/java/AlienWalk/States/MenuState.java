@@ -2,6 +2,7 @@ package AlienWalk.States;
 
 import AlienWalk.Controller.Controller;
 import AlienWalk.Controller.MenuController;
+import AlienWalk.Game;
 import AlienWalk.Model.Menu;
 import AlienWalk.Viewer.MenuViewer;
 
@@ -12,7 +13,7 @@ public class MenuState extends State<Menu>{
     }
 
     @Override
-    public void step(){
+    public void step(Game game){
 
     }
 }

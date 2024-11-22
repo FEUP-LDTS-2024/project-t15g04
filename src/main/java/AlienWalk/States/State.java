@@ -1,6 +1,7 @@
 package AlienWalk.States;
 
 import AlienWalk.Controller.Controller;
+import AlienWalk.Game;
 import AlienWalk.Viewer.Viewer;
 
 public abstract class State<T> {
@@ -14,5 +15,5 @@ public abstract class State<T> {
         this.viewer = viewer;
     }
 
-    public abstract void step()
+    public abstract void step(Game game)
 ;}

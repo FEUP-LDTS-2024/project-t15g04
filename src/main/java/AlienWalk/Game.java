@@ -40,7 +40,7 @@ public class Game {
 
     public void run(){
         while(true){
-            state.step();
+            state.step(this);
         }
     }
 }
