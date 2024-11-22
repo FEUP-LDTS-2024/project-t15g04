@@ -29,21 +29,19 @@ public class Game {
                     DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
             Terminal terminal = terminalFactory.createTerminal();
             screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null); // we don't need a cursor
-            screen.startScreen(); // screens must be started
-            screen.doResizeIfNecessary(); // resize screen if necessary
+            screen.setCursorPosition(null);
+            screen.startScreen();
+            screen.doResizeIfNecessary();
 
             this.state = new MenuState(new Menu(), new MenuController(), new MenuViewer(screen));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException ignored) {}
     }
 
     public void run(){
         while(state != null){
             state.step(this);
-            System.out.println("ruuuuun");
+            //System.out.println("running");
         }
-        System.out.println("koniec???");
+        //System.out.println("END");
     }
 }

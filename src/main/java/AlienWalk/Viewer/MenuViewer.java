@@ -31,29 +31,29 @@ public class MenuViewer extends Viewer<Menu> {
     @Override
     public void draw(Menu model) {
         screen.clear();
-        System.out.println("jestesmy w draw!");
         TextGraphics textGraphics = screen.newTextGraphics();
-          textGraphics.putString(3,5,"START", SGR.UNDERLINE);
-          System.out.println("jestesmy w draw2!");
-        textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de00"));
+        textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
+
         switch (model.getCurrent()){
             case Start:
                 textGraphics.putString(3,5,"START", SGR.UNDERLINE);
                 textGraphics.putString(3,10,"SETTINGS");
                 textGraphics.putString(3,15,"QUIT");
+                break;
             case Settings:
                 textGraphics.putString(3,5,"START");
                 textGraphics.putString(3,10,"SETTINGS", SGR.UNDERLINE);
                 textGraphics.putString(3,15,"QUIT");
+                break;
             case Quit:
                 textGraphics.putString(3,5,"START");
                 textGraphics.putString(3,10,"SETTINGS");
                 textGraphics.putString(3,15,"QUIT", SGR.UNDERLINE);
+                break;
         }
         try{
             screen.refresh();
         } catch (IOException ignored) {}
-
     }
 }

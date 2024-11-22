@@ -16,18 +16,29 @@ public class MenuController extends Controller<Menu>{
         switch(key.getKeyType()){
             case ArrowDown:
                 model.setCurrent(Menu.Option.next(model.getCurrent()));
+                break;
             case ArrowUp:
                 model.setCurrent(Menu.Option.previous(model.getCurrent()));
+                break;
             case Enter:
                 switch (model.getCurrent()){
                     case Start:
                         game.state = new GameState(new Level(),new GameViewer(game.screen), new GameController());
+                        break;
                     case Settings:
                         // To DO?
+                        break;
                     case Quit:
-                        //game.screen.close();
-                        //game.state = null;
+                        game.screen.close();
+                        game.state = null;
+                        break;
+                    default:
+                        //System.out.println("default");
+                        break;
                 }
+            default:
+                //System.out.println("default");
+                break;
 
         }
     }

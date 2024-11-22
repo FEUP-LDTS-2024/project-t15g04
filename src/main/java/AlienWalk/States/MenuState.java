@@ -18,15 +18,15 @@ public class MenuState extends State<Menu>{
     }
 
     @Override
-    public void step(Game game){
+    public void step(Game game) {
         viewer.draw(model);
         KeyStroke key = viewer.read();
-        if(key.getKeyType() == KeyType.EOF){
-            return;
+        if (key.getKeyType() == KeyType.EOF) {
+            game.state = null;
         }
-        System.out.println(key.getKeyType());
         try {
             controller.processInput(key, game, model);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 }
