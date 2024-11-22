@@ -1,8 +1,8 @@
-package AlienWalk;
+package AlienWalk.Model;
 
-import AlienWalk.Elements.Alien;
-import AlienWalk.Elements.Monster;
-import AlienWalk.Elements.Tile;
+import AlienWalk.Model.Elements.Alien;
+import AlienWalk.Model.Elements.Monster;
+import AlienWalk.Model.Elements.Tile;
 
 import java.util.List;
 

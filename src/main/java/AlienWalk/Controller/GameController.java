@@ -1,4 +1,6 @@
 package AlienWalk.Controller;
 
-public class GameController {
+import AlienWalk.Model.Level;
+
+public class GameController extends Controller<Level>{
 }

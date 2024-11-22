@@ -1,4 +1,10 @@
 package AlienWalk.Viewer;
 
-public class MenuViewer {
+import com.googlecode.lanterna.screen.Screen;
+
+public class MenuViewer extends Viewer {
+
+    public MenuViewer(Screen screen) {
+        super(screen);
+    }
 }

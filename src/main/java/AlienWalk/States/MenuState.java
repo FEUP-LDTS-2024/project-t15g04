@@ -1,13 +1,18 @@
 package AlienWalk.States;
 
-public class MenuState extends State{
-    @Override
-    public void draw() {
+import AlienWalk.Controller.Controller;
+import AlienWalk.Controller.MenuController;
+import AlienWalk.Model.Menu;
+import AlienWalk.Viewer.MenuViewer;
 
+public class MenuState extends State<Menu>{
+
+    public MenuState(Menu model, MenuController controller, MenuViewer viewer) {
+        super(model, controller, viewer);
     }
 
     @Override
-    public void update() {
+    public void step(){
 
     }
 }

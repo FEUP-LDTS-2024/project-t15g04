@@ -1,4 +1,4 @@
-package AlienWalk.Elements;
+package AlienWalk.Model.Elements;
 
 public class Monster extends Element{
 

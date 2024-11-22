@@ -1,17 +1,16 @@
 package AlienWalk.States;
 
-import AlienWalk.Level;
+import AlienWalk.Controller.GameController;
+import AlienWalk.Model.Level;
+import AlienWalk.Viewer.GameViewer;
 
-public class GameState extends State{
-    private Level level;
-
-    @Override
-    public void draw() {
-
+public class GameState extends State<Level>{
+    public GameState(Level level, GameViewer gameViewer, GameController gameController){
+        super(level, gameController, gameViewer);
     }
 
     @Override
-    public void update() {
+    public void step() {
 
     }
 }
