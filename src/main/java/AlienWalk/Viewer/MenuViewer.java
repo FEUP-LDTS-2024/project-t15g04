@@ -32,7 +32,7 @@ public class MenuViewer extends Viewer<Menu> {
     public void draw(Menu model) {
         screen.clear();
         TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de00"));
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de75"));
         textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
 
         switch (model.getCurrent()){
