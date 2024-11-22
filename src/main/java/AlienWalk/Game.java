@@ -14,8 +14,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
-    private State state;
-    private Screen screen;
+    public State state;
+    public Screen screen;
 
     public static void main(String[] args) throws IOException {
         Game game = new Game();
@@ -32,15 +32,18 @@ public class Game {
             screen.setCursorPosition(null); // we don't need a cursor
             screen.startScreen(); // screens must be started
             screen.doResizeIfNecessary(); // resize screen if necessary
+
+            this.state = new MenuState(new Menu(), new MenuController(), new MenuViewer(screen));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.state = new MenuState(new Menu(), new MenuController(), new MenuViewer(screen));
     }
 
     public void run(){
-        while(true){
+        while(state != null){
             state.step(this);
+            System.out.println("ruuuuun");
         }
+        System.out.println("koniec???");
     }
 }

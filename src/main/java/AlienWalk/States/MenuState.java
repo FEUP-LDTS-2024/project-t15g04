@@ -6,6 +6,11 @@ import AlienWalk.Game;
 import AlienWalk.Model.Menu;
 import AlienWalk.Viewer.MenuViewer;
 
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+
+import java.io.IOException;
+
 public class MenuState extends State<Menu>{
 
     public MenuState(Menu model, MenuController controller, MenuViewer viewer) {
@@ -14,6 +19,14 @@ public class MenuState extends State<Menu>{
 
     @Override
     public void step(Game game){
-
+        viewer.draw(model);
+        KeyStroke key = viewer.read();
+        if(key.getKeyType() == KeyType.EOF){
+            return;
+        }
+        System.out.println(key.getKeyType());
+        try {
+            controller.processInput(key, game, model);
+        } catch (IOException ignored) {}
     }
 }
