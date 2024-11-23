@@ -18,11 +18,14 @@ public class Level {
 
     public Level(){
         which = 1;
-        width = 20;
-        height = 40;
+        width = 40;
+        height = 20;
         alien = new Alien(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
+        for(int i=0; i<width-1; i++){
+            tiles[height-1][i] = new Tile(i,height);
+        }
     }
 
     public boolean checkColision(){

@@ -18,17 +18,6 @@ public class MenuViewer extends Viewer<Menu> {
     }
 
     @Override
-    public KeyStroke read(){
-        KeyStroke k;
-        try {
-            k = this.screen.readInput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return k;
-    }
-
-    @Override
     public void draw(Menu model) {
         screen.clear();
         TextGraphics textGraphics = screen.newTextGraphics();

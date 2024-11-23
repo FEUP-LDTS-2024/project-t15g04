@@ -18,18 +18,6 @@ public class GameViewer extends Viewer<Level>{
         super(screen);
     }
 
-
-    @Override
-    public KeyStroke read() {
-        KeyStroke k;
-        try {
-            k = this.screen.readInput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return k;
-    }
-
     @Override
     public void draw(Level model) {
         screen.clear();

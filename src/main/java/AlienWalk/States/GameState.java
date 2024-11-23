@@ -10,21 +10,40 @@ import com.googlecode.lanterna.input.KeyType;
 import java.io.IOException;
 
 public class GameState extends State<Level>{
+    public int frame; //just for debuggig
+
     public GameState(Level level, GameViewer gameViewer, GameController gameController){
         super(level, gameController, gameViewer);
+        frame = 0;
     }
 
     @Override
     public void step(Game game) {
         viewer.draw(model);
-        KeyStroke key = viewer.read();
-        if (key.getKeyType() == KeyType.EOF) {
-            game.state = null;
-        }
-        try {
 
-            controller.processInput(key, game, model);
-        }
-        catch (IOException ignored) {}
+            System.out.println("frame: " + frame);
+            frame += 1;
+            long startTime = System.currentTimeMillis(); // Record the start time
+
+            // Read input if available
+            KeyStroke key = viewer.poll(); // Use poll instead of read to avoid blocking
+        try {
+            viewer.flushInput();
+        } catch (IOException ignored) {}
+
+
+        try {
+                // Process input or perform periodic updates
+                controller.processInput(key, game, model);
+            } catch (IOException ignored) {}
+
+            // Ensure the loop runs every 100 ms
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            long sleepTime = Math.max(0, 150 - elapsedTime); // Calculate remaining time
+            try {
+                Thread.sleep(sleepTime); // Pause to maintain the desired interval
+            } catch (InterruptedException ignored) {}
+
     }
+
 }
