@@ -1,6 +1,7 @@
 package AlienWalk.Viewer;
 
 import AlienWalk.Model.Level;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -35,6 +36,10 @@ public class GameViewer extends Viewer<Level>{
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de75"));
         textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
+
+        textGraphics.enableModifiers(SGR.BOLD);
+        textGraphics.putString(new TerminalPosition(model.getAlien().getPosition().getX(),
+                model.getAlien().getPosition().getY()), "X");
 
         try{
             screen.refresh();

@@ -42,7 +42,11 @@ public class Level {
         return tiles;
     }
 
-    public boolean isAlienOnTitle(){
+    public boolean isAlienOnTile(){
+        return tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()] != null;
+    }
+
+    public boolean isAlienUnderTile(){
         return tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()] != null;
     }
 }

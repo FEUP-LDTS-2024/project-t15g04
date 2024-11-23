@@ -26,10 +26,18 @@ public class Position {
     }
 
     public void increaseY(){
-        this.y = this.y + 1;
+        this.y = this.y - 1;
     }
 
     public void decreaseY(){
-        this.y = this.y - 1;
+        this.y = this.y + 1;
+    }
+
+    public void increaseX(){
+        this.x = this.x + 1;
+    }
+
+    public void decreaseX(){
+        this.x = this.x - 1;
     }
 }
