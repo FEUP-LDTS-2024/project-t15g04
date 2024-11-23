@@ -25,6 +25,5 @@ public class GameState extends State<Level>{
             controller.processInput(key, game, model);
         }
         catch (IOException ignored) {}
-
     }
 }

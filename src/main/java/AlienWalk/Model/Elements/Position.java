@@ -24,4 +24,12 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void increaseY(){
+        this.y = this.y + 1;
+    }
+
+    public void decreaseY(){
+        this.y = this.y - 1;
+    }
 }

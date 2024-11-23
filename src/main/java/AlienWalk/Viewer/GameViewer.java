@@ -1,10 +1,14 @@
 package AlienWalk.Viewer;
 
 import AlienWalk.Model.Level;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+
+import java.io.IOException;
 
 public class GameViewer extends Viewer<Level>{
     private Level level;
@@ -16,12 +20,24 @@ public class GameViewer extends Viewer<Level>{
 
     @Override
     public KeyStroke read() {
-        return null;
+        KeyStroke k;
+        try {
+            k = this.screen.readInput();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return k;
     }
 
     @Override
     public void draw(Level model) {
-//        TextGraphics textGraphics = screen.newTextGraphics();
-//        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de00"));
+        screen.clear();
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de75"));
+        textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
+
+        try{
+            screen.refresh();
+        } catch (IOException ignored) {}
     }
 }
