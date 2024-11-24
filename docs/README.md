@@ -36,6 +36,6 @@ We decided to design our game according to MVC design patter. As consequence our
 * MenuViewer: Manages rendering of the game menu on the screen.
 * Viewer: A base class for all viewer-related functionality in the game.
 
-[Link to UML](/images/AlienUML.png)
+[Link to UML](/images/AlienWalkUML.png)
 
 
