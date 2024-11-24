@@ -40,11 +40,11 @@ We decided to design our game according to MVC design patter. As consequence our
 
 ## Mockups:
 
-[Level Map Mockup 1](https://github.com/FEUP-LDTS-2024/project-t15g04/blob/master/docs/images/mockup1.png?raw=true)
+[Level Map Mockup 1](../docs/images/mockup1.png)
 
-[Level Map Mockup 2](https://github.com/FEUP-LDTS-2024/project-t15g04/blob/master/docs/images/mockup2.png?raw=true)
+[Level Map Mockup 2](../docs/images/mockup2.png)
 
-[Main Menu Mockup](https://github.com/FEUP-LDTS-2024/project-t15g04/blob/master/docs/images/mockup3.png?raw=true)
+[Main Menu Mockup](../docs/images/mockup3.png)
 
 
 
