@@ -11,39 +11,44 @@ import java.io.IOException;
 
 public class GameState extends State<Level>{
     public int frame; //just for debuggig
+    public static String pathToLevelFile;
 
     public GameState(Level level, GameViewer gameViewer, GameController gameController){
         super(level, gameController, gameViewer);
+        ((Level)this.model).populateLevel("Levels/TestLevel.txt");
         frame = 0;
+    }
+
+    public static void NextLevel(){
+        // TO DO
+        //pathToLevelFile = next
     }
 
     @Override
     public void step(Game game) {
         viewer.draw(model);
 
-            System.out.println("frame: " + frame);
-            frame += 1;
-            long startTime = System.currentTimeMillis(); // Record the start time
+        System.out.println("frame: " + frame);
+        frame += 1;
+        long startTime = System.currentTimeMillis(); // Record the start time
 
-            // Read input if available
-            KeyStroke key = viewer.poll(); // Use poll instead of read to avoid blocking
+        // Read input if available
+        KeyStroke key = viewer.poll(); // Use poll instead of read to avoid blocking
         try {
             viewer.flushInput();
         } catch (IOException ignored) {}
 
 
         try {
-                // Process input or perform periodic updates
-                controller.processInput(key, game, model);
-            } catch (IOException ignored) {}
+            // Process input or perform periodic updates
+            controller.processInput(key, game, model);
+        } catch (IOException ignored) {}
 
-            // Ensure the loop runs every 100 ms
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = Math.max(0, 150 - elapsedTime); // Calculate remaining time
-            try {
-                Thread.sleep(sleepTime); // Pause to maintain the desired interval
-            } catch (InterruptedException ignored) {}
-
+        // Ensure the loop runs every 100 ms
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        long sleepTime = Math.max(0, 150 - elapsedTime); // Calculate remaining time
+        try {
+            Thread.sleep(sleepTime); // Pause to maintain the desired interval
+        } catch (InterruptedException ignored) {}
     }
-
 }

@@ -1,6 +1,7 @@
 package AlienWalk;
 
 import AlienWalk.Controller.MenuController;
+import AlienWalk.Model.Level;
 import AlienWalk.Model.Menu;
 import AlienWalk.States.MenuState;
 import AlienWalk.States.State;

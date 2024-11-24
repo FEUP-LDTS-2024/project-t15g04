@@ -4,6 +4,10 @@ import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Tile;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +27,46 @@ public class Level {
         alien = new Alien(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
-        for(int i=0; i<width-1; i++){
-            tiles[height-1][i] = new Tile(i,height);
+    }
+
+    public void populateLevel(String filePath){
+        // Access the resource
+        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
+             InputStreamReader reader = new InputStreamReader(inputStream);
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+            int character;
+            // Read character by character
+            int i = 0;
+            int j = 0;
+            while ((character = bufferedReader.read()) != -1) {
+                System.out.println(i);
+                System.out.println(j);
+                switch((char) character){
+                    case '\n':
+                        j += 1;
+                        i = 0;
+                        break;
+                    case ' ':
+                        i += 1;
+                        break;
+                    case 'T':
+                        this.tiles[j][i] = new Tile(i,j);
+                        i += 1;
+                        break;
+                    case 'A':
+                        this.alien.getPosition().setY(j);
+                        this.alien.getPosition().setX(i);
+                        i += 1;
+                        break;
+                }
+                System.out.print((char) character); // Print each character
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.println("File not found in resources/Levels.");
         }
     }
 
