@@ -11,7 +11,7 @@ repositories {
 }
 
 application{
-    mainClass = 'Game'
+    mainClass.set('AlienWalk.Game')
 }
 
 dependencies {
