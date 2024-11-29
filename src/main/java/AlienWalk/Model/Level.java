@@ -100,6 +100,7 @@ public class Level {
     }
 
     public boolean isTileBelow(){
+        if(alien.getTransition_y() < 0) return false;
         boolean tmp = false;
         if(alien.getTransition_x()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
@@ -112,12 +113,30 @@ public class Level {
     }
 
     public boolean isTileOnLeft(){
+        boolean tmp = false;
         if(alien.getPosition().getX() == 0) return true;
-        return tiles[alien.getPosition().getY()][alien.getPosition().getX()-1] != null;
+
+        if(alien.getTransition_y()>0){
+            tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
+        }
+        if(alien.getTransition_y()<0){
+            tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
+        }
+
+        return tmp || (tiles[alien.getPosition().getY()][alien.getPosition().getX()-1] != null);
     }
 
     public boolean isTileOnRight(){
         if(alien.getPosition().getX() == width-1) return true;
-        return tiles[alien.getPosition().getY()][alien.getPosition().getX()+1] != null;
+
+        boolean tmp = false;
+        if(alien.getTransition_y()>0){
+            tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
+        }
+        if(alien.getTransition_y()<0){
+            tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
+        }
+
+        return tmp || (tiles[alien.getPosition().getY()][alien.getPosition().getX()+1] != null);
     }
 }
