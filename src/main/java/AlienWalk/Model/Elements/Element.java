@@ -4,6 +4,7 @@ public class Element {
     private Position position; //top left corner
     private int transition_x;
     private int transition_y;
+    private static final int TRANSIMISION_STEP = 2;
 
     public Element(int x, int y){
         this.position = new Position(x,y);
@@ -32,28 +33,28 @@ public class Element {
     }
 
     public void up(){
-        transition_y -= 2;
+        transition_y -= TRANSIMISION_STEP;
         if(transition_y == -8){
             position.increaseY();
             transition_y = 0;
         }
     }
     public void down(){
-        transition_y += 2;
+        transition_y += TRANSIMISION_STEP;
         if(transition_y == 8){
             position.decreaseY();
             transition_y = 0;
         }
     }
     public void left(){
-        transition_x -= 2;
+        transition_x -= TRANSIMISION_STEP;
         if(transition_x == -8){
             position.decreaseX();
             transition_x = 0;
         }
     }
     public void right(){
-        transition_x += 2;
+        transition_x += TRANSIMISION_STEP;
         if(transition_x == 8){
             position.increaseX();
             transition_x = 0;

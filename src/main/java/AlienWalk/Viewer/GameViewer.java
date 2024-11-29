@@ -19,7 +19,6 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer tileViewer;
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
-    public final int PNG_SIZE = 8;
 
     public GameViewer(Screen screen) throws IOException {
         super(screen);
