@@ -22,7 +22,7 @@ public class GameController extends Controller<Level>{
         System.out.print(" -------: ");
         System.out.println(model.getAlien().getPosition().getY());
         if(key != null) {
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ' && model.isAlienOnTile()) {
+            if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ' && model.isTileBelow()) {
                 model.getAlien().start_jump();
             }
             switch (key.getKeyType()) {
@@ -41,7 +41,7 @@ public class GameController extends Controller<Level>{
 
         if(model.getAlien().getJumpState()>0){ // alien going up until possible
             System.out.println("alien up");
-            if(model.isAlienUnderTile()){
+            if(model.isTileAbove()){
                 model.getAlien().setJumpState(0);
             }
             else{
@@ -50,7 +50,7 @@ public class GameController extends Controller<Level>{
             }
         }
 
-        if(model.getAlien().getJumpState() == 0 && !(model.isAlienOnTile())){ // alien falling
+        if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // alien falling
             System.out.println("alien down");
             model.getAlien().down();
         }

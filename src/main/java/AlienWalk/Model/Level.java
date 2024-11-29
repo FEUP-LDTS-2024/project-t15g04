@@ -87,12 +87,28 @@ public class Level {
         return tiles;
     }
 
-    public boolean isAlienOnTile(){
-        return tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()] != null;
+    public boolean isTileAbove(){
+        boolean tmp = false;
+        if(alien.getTransition_x()>0){
+            tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
+        }
+        if(alien.getTransition_x()<0){
+            tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
+        }
+
+        return tmp || (tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()] != null);
     }
 
-    public boolean isAlienUnderTile(){
-        return tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()] != null;
+    public boolean isTileBelow(){
+        boolean tmp = false;
+        if(alien.getTransition_x()>0){
+            tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
+        }
+        if(alien.getTransition_x()<0){
+            tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
+        }
+
+        return tmp || (tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()] != null);
     }
 
     public boolean isTileOnLeft(){
