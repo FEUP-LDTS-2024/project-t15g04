@@ -18,18 +18,23 @@ public class GameController extends Controller<Level>{
 
     @Override
     public void processInput(KeyStroke key, Game game, Level model) throws IOException {
+        System.out.print(model.getAlien().getPosition().getX());
+        System.out.print(" -------: ");
+        System.out.println(model.getAlien().getPosition().getY());
         if(key != null) {
             if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ' && model.isAlienOnTile()) {
-                model.getAlien().setJumpState(5);
+                model.getAlien().start_jump();
             }
             switch (key.getKeyType()) {
 //            case ArrowUp:
 //                break;
                 case ArrowRight:
-                    model.getAlien().getPosition().increaseX();
+                    if(model.isTileOnRight()) break;
+                    model.getAlien().right();
                     break;
                 case ArrowLeft:
-                    model.getAlien().getPosition().decreaseX();
+                    if(model.isTileOnLeft()) break;
+                    model.getAlien().left();
                     break;
             }
         }
@@ -40,14 +45,14 @@ public class GameController extends Controller<Level>{
                 model.getAlien().setJumpState(0);
             }
             else{
-                model.getAlien().getPosition().increaseY();
+                model.getAlien().up();
                 model.getAlien().setJumpState(model.getAlien().getJumpState() - 1);
             }
         }
 
         if(model.getAlien().getJumpState() == 0 && !(model.isAlienOnTile())){ // alien falling
             System.out.println("alien down");
-            model.getAlien().getPosition().decreaseY();
+            model.getAlien().down();
         }
         System.out.println(model.getAlien().getPosition().getX());
         System.out.println(model.getAlien().getPosition().getY());

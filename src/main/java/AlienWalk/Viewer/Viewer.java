@@ -17,8 +17,6 @@ public abstract class Viewer<T> {
 
     public KeyStroke read(){
         KeyStroke k;
-
-
         try {
             k = this.screen.readInput();
         } catch (IOException e) {

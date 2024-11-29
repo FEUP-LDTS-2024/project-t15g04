@@ -94,4 +94,14 @@ public class Level {
     public boolean isAlienUnderTile(){
         return tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()] != null;
     }
+
+    public boolean isTileOnLeft(){
+        if(alien.getPosition().getX() == 0) return true;
+        return tiles[alien.getPosition().getY()][alien.getPosition().getX()-1] != null;
+    }
+
+    public boolean isTileOnRight(){
+        if(alien.getPosition().getX() == width-1) return true;
+        return tiles[alien.getPosition().getY()][alien.getPosition().getX()+1] != null;
+    }
 }
