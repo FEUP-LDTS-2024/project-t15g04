@@ -40,7 +40,7 @@ public class GameState extends State<Level>{
 
         // Ensure the loop runs every 100 ms
         long elapsedTime = System.currentTimeMillis() - startTime;
-        long sleepTime = Math.max(0, 20 - elapsedTime); // Calculate remaining time
+        long sleepTime = Math.max(0, 10 - elapsedTime); // Calculate remaining time
         try {
             Thread.sleep(sleepTime); // Pause to maintain the desired interval
         } catch (InterruptedException ignored) {}

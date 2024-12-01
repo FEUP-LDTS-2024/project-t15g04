@@ -113,6 +113,7 @@ public class Level {
     }
 
     public boolean isTileOnLeft(){
+        if(alien.getTransition_x() > 0) return false;
         boolean tmp = false;
         if(alien.getPosition().getX() == 0) return true;
 
@@ -127,6 +128,7 @@ public class Level {
     }
 
     public boolean isTileOnRight(){
+        if(alien.getTransition_x() < 0) return false;
         if(alien.getPosition().getX() == width-1) return true;
 
         boolean tmp = false;
