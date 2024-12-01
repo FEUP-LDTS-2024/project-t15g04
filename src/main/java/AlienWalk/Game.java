@@ -6,12 +6,14 @@ import AlienWalk.Model.Menu;
 import AlienWalk.States.MenuState;
 import AlienWalk.States.State;
 import AlienWalk.Viewer.MenuViewer;
+import AlienWalk.Viewer.Viewer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
 import java.io.File;
