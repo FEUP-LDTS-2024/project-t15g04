@@ -8,13 +8,25 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
 
 public class MenuViewer extends Viewer<Menu> {
 
-    public MenuViewer(Screen screen) {
+    public MenuViewer(TerminalScreen screen) {
         super(screen);
+    }
+
+    @Override
+    public int read(){
+        System.out.println("menu read vals: " + String.valueOf(quit)+ String.valueOf(up)
+        + String.valueOf(down)+ String.valueOf(enter));
+        if(quit) return 0;
+        if(up) return 1;
+        if(down) return 2;
+        if(enter) return 3;
+        return -1; //no input
     }
 
     @Override

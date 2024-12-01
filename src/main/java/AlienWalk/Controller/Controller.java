@@ -8,5 +8,5 @@ import java.io.IOException;
 public abstract class Controller<T> {
     public Controller(){};
 
-    public abstract void processInput(KeyStroke key, Game game, T model) throws IOException;
+    public abstract void processInput(int inputOption, Game game, T model) throws IOException;
 }

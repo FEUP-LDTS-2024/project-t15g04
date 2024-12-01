@@ -10,6 +10,7 @@ import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
 
@@ -20,12 +21,23 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
 
-    public GameViewer(Screen screen) throws IOException {
+    public GameViewer(TerminalScreen screen) throws IOException {
         super(screen);
         this.textGraphics = screen.newTextGraphics();
         tileViewer = new ElementViewer("ElementsImages/Tile.png");
         alienViewer = new ElementViewer("ElementsImages/Alien.png");
         monsterViewer = new ElementViewer("ElementsImages/Monster.png");
+    }
+
+    @Override
+    public int read(){
+        if(quit) return 0;
+        if((up && right && !left) || (jump && right && !left)) return 1;
+        if((up && left && !right) || (jump && left && !right)) return 2;
+        if(up || jump) return 3;
+        if(right && !left) return 4;
+        if(left && !right) return 5;
+        return -1; // no input
     }
 
     @Override

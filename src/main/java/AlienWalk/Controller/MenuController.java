@@ -12,15 +12,18 @@ import java.io.IOException;
 
 public class MenuController extends Controller<Menu>{
     @Override
-    public void processInput(KeyStroke key, Game game, Menu model) throws IOException {
-        switch(key.getKeyType()){
-            case ArrowDown:
+    public void processInput(int inputOption, Game game, Menu model) throws IOException {
+        System.out.println("inside Menu Controller");
+        System.out.println("inputOption =" + String.valueOf(inputOption));
+        switch(inputOption){
+            case 2: // down
                 model.setCurrent(Menu.Option.next(model.getCurrent()));
                 break;
-            case ArrowUp:
+            case 1: // up
                 model.setCurrent(Menu.Option.previous(model.getCurrent()));
                 break;
-            case Enter:
+            case 3: // enter
+                System.out.println(model.getCurrent());
                 switch (model.getCurrent()){
                     case Start:
                         game.state = new GameState(new Level(),new GameViewer(game.screen), new GameController());
@@ -36,6 +39,11 @@ public class MenuController extends Controller<Menu>{
                         //System.out.println("default");
                         break;
                 }
+                break;
+            case(0): // esc
+                game.screen.close();
+                game.state = null;
+                break;
             default:
                 //System.out.println("default");
                 break;

@@ -23,7 +23,7 @@ import java.net.URL;
 
 public class Game {
     public State state;
-    public Screen screen;
+    public TerminalScreen screen;
 
     public static void main(String[] args) throws IOException {
         Game game = new Game();

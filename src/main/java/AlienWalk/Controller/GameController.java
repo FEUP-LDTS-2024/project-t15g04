@@ -17,26 +17,33 @@ public class GameController extends Controller<Level>{
     }
 
     @Override
-    public void processInput(KeyStroke key, Game game, Level model) throws IOException {
+    public void processInput(int inputOption, Game game, Level model) throws IOException {
         System.out.print(model.getAlien().getPosition().getX());
         System.out.print(" -------: ");
         System.out.println(model.getAlien().getPosition().getY());
-        if(key != null) {
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ' && model.isTileBelow()) {
-                model.getAlien().start_jump();
-            }
-            switch (key.getKeyType()) {
-//            case ArrowUp:
-//                break;
-                case ArrowRight:
-                    if(model.isTileOnRight()) break;
-                    model.getAlien().right();
-                    break;
-                case ArrowLeft:
-                    if(model.isTileOnLeft()) break;
-                    model.getAlien().left();
-                    break;
-            }
+
+        switch(inputOption){
+            case(0): // esc
+                game.screen.close();
+                game.state = null;
+                break;
+            case(1): // up right
+                if(!model.isTileOnRight()) model.getAlien().right();
+                if(model.isTileBelow()) model.getAlien().start_jump();
+                break;
+            case(2): // up left
+                if(!model.isTileOnLeft()) model.getAlien().left();
+                if(model.isTileBelow()) model.getAlien().start_jump();
+                break;
+            case(3): // up
+                if(model.isTileBelow()) model.getAlien().start_jump();
+                break;
+            case(4): // right
+                if(!model.isTileOnRight()) model.getAlien().right();
+                break;
+            case(5): //left
+                if(!model.isTileOnLeft()) model.getAlien().left();
+                break;
         }
 
         if(model.getAlien().getJumpState()>0){ // alien going up until possible

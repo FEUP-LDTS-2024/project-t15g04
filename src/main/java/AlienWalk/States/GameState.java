@@ -32,16 +32,10 @@ public class GameState extends State<Level>{
         frame += 1;
         long startTime = System.currentTimeMillis(); // Record the start time
 
-        // Read input if available
-        KeyStroke key = viewer.poll(); // Use poll instead of read to avoid blocking
-        try {
-            viewer.flushInput();
-        } catch (IOException ignored) {}
-
+        int inputOption = viewer.read();
 
         try {
-            // Process input or perform periodic updates
-            controller.processInput(key, game, model);
+            controller.processInput(inputOption, game, model);
         } catch (IOException ignored) {}
 
         // Ensure the loop runs every 100 ms

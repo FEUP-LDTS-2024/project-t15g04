@@ -3,6 +3,7 @@ package AlienWalk.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 
 import  com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.event.KeyEvent;
@@ -12,12 +13,12 @@ import java.io.IOException;
 import static java.awt.event.KeyEvent.*;
 
 public abstract class Viewer<T> {
-    Screen screen;
+    TerminalScreen screen;
     boolean left, right, up, down, jump, enter, quit;
 
-    public Viewer(Screen screen){
+    public Viewer(TerminalScreen screen){
         this.screen = screen;
-        ((AWTTerminalFrame) this.screen).getComponent(0).addKeyListener(new MyKeyAdapter());
+        ((AWTTerminalFrame) this.screen.getTerminal()).getComponent(0).addKeyListener(new MyKeyAdapter());
         left = false;
         right = false;
         up = false;
@@ -29,15 +30,7 @@ public abstract class Viewer<T> {
 
     public abstract void draw(T model);
 
-    public KeyStroke read(){
-        KeyStroke k;
-        try {
-            k = this.screen.readInput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return k;
-    }
+    public abstract int read();
 
     public KeyStroke poll() {
         KeyStroke k;
@@ -67,21 +60,29 @@ public abstract class Viewer<T> {
         @Override
         public void keyPressed(KeyEvent keyEvent) {
             int code = keyEvent.getKeyCode();
+            System.out.println("key pressed = " + String.valueOf(code));
             switch(code){
                 case(VK_LEFT):
                     left = true;
+                    break;
                 case(VK_RIGHT):
                     right = true;
+                    break;
                 case(VK_UP):
                     up = true;
+                    break;
                 case(VK_DOWN):
                     down = true;
+                    break;
                 case(VK_ENTER):
                     enter = true;
+                    break;
                 case(VK_SPACE):
                     jump = true;
+                    break;
                 case(VK_ESCAPE):
                     quit = true;
+                    break;
             }
         }
 
