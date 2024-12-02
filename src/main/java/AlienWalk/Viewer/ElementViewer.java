@@ -20,8 +20,8 @@ public class ElementViewer {
     }
 
     public void draw(Position position,int transitionX, int transitionY, TextGraphics tg){
-        for (int x = 0; x < 8; x++){ // image.getWidth()
-            for (int y = 0; y < 8; y++){ // image.getHeight()
+        for (int x = 0; x < image.getWidth(); x++){ // image.getWidth()
+            for (int y = 0; y < image.getHeight(); y++){ // image.getHeight()
                 int a = image.getRGB(x, y);
                 int alpha = (a >> 24) & 0xff;
                 int red = (a >> 16) & 255;
@@ -30,7 +30,7 @@ public class ElementViewer {
 
                 if (alpha != 0) {
                     TextCharacter c = new TextCharacter(' ', new TextColor.RGB(red, green, blue), new TextColor.RGB(red, green, blue));
-                    tg.setCharacter(position.getX()*8 + transitionX + x, position.getY()*8 + transitionY + y, c);
+                    tg.setCharacter(position.getX()*image.getWidth() + transitionX + x, position.getY()*image.getHeight() + transitionY + y, c);
                 }
             }
         }

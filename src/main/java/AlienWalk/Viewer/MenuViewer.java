@@ -1,5 +1,6 @@
 package AlienWalk.Viewer;
 
+import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Menu;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -13,9 +14,11 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import java.io.IOException;
 
 public class MenuViewer extends Viewer<Menu> {
+    private ElementViewer menuViewer;
 
-    public MenuViewer(TerminalScreen screen) {
+    public MenuViewer(TerminalScreen screen) throws IOException {
         super(screen);
+        menuViewer = new ElementViewer("MainMenuImage.png");
     }
 
     @Override
@@ -33,24 +36,20 @@ public class MenuViewer extends Viewer<Menu> {
     public void draw(Menu model) {
         screen.clear();
         TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de75"));
-        textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#1bc70f"));
+        //textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
+
+        menuViewer.draw(new Position(0,0),0,0,textGraphics);
 
         switch (model.getCurrent()){
             case Start:
-                textGraphics.putString(3,5,"START", SGR.UNDERLINE);
-                textGraphics.putString(3,10,"SETTINGS");
-                textGraphics.putString(3,15,"QUIT");
+                textGraphics.drawLine(115,75,180,75,' ');
                 break;
             case Settings:
-                textGraphics.putString(3,5,"START");
-                textGraphics.putString(3,10,"SETTINGS", SGR.UNDERLINE);
-                textGraphics.putString(3,15,"QUIT");
+                textGraphics.drawLine(115,94,190,94,' ');
                 break;
             case Quit:
-                textGraphics.putString(3,5,"START");
-                textGraphics.putString(3,10,"SETTINGS");
-                textGraphics.putString(3,15,"QUIT", SGR.UNDERLINE);
+                textGraphics.drawLine(115,114,160,114,' ');
                 break;
         }
         try{
