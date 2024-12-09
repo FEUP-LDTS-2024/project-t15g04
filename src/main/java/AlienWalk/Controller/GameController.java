@@ -61,6 +61,8 @@ public class GameController extends Controller<Level>{
             System.out.println("alien down");
             model.getAlien().down();
         }
+
+
         System.out.println(model.getAlien().getPosition().getX());
         System.out.println(model.getAlien().getPosition().getY());
     }

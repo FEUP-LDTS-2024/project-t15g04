@@ -2,6 +2,7 @@ package AlienWalk.Model;
 
 import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
+import AlienWalk.Model.Elements.Ship;
 import AlienWalk.Model.Elements.Tile;
 
 import java.io.BufferedReader;
@@ -19,14 +20,17 @@ public class Level {
     private Alien alien;
     private Monster[][] monsters;
     private Tile[][] tiles;
+    private Ship ship;
 
     public Level(){
         which = 1;
         width = 40;
         height = 20;
         alien = new Alien(0,0);
+        ship = new Ship(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
+        populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
     }
 
     public void populateLevel(String filePath){
@@ -59,6 +63,11 @@ public class Level {
                         this.alien.getPosition().setX(i);
                         i += 1;
                         break;
+                    case 'S': //ship
+                        this.ship.getPosition().setY(j);
+                        this.ship.getPosition().setX(i);
+                        i += 1;
+                        break;
                 }
                 System.out.print((char) character); // Print each character
             }
@@ -75,8 +84,17 @@ public class Level {
         return false;
     }
 
+    public void nextLevel(){
+        which += 1;
+        populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
+    }
+
     public Alien getAlien() {
         return alien;
+    }
+
+    public Ship getShip(){
+        return ship;
     }
 
     public Monster[][] getMonsters() {

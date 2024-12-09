@@ -15,14 +15,15 @@ public class GameState extends State<Level>{
 
     public GameState(Level level, GameViewer gameViewer, GameController gameController){
         super(level, gameController, gameViewer);
-        ((Level)this.model).populateLevel("Levels/TestLevel.txt");
+        this.model.populateLevel("Levels/TestLevel.txt");
         frame = 0;
     }
 
-    public static void NextLevel(){
-        // TO DO
-        //pathToLevelFile = next
-    }
+//    MOVED TO LEVEL CLASS
+//    public static void NextLevel(){
+//        // TO DO
+//        //pathToLevelFile = next
+//    }
 
     @Override
     public void step(Game game) {

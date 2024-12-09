@@ -50,6 +50,7 @@ public abstract class Viewer<T> {
         }
     }
 
+    // maybe change according to strategy pattern?
     public class MyKeyAdapter implements KeyListener{
 
         public MyKeyAdapter(){}

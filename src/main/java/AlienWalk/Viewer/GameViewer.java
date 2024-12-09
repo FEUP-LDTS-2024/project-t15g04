@@ -20,6 +20,7 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer tileViewer;
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
+    private ElementViewer shipViewer;
 
     public GameViewer(TerminalScreen screen) throws IOException {
         super(screen);
@@ -27,6 +28,7 @@ public class GameViewer extends Viewer<Level>{
         tileViewer = new ElementViewer("ElementsImages/Tile.png");
         alienViewer = new ElementViewer("ElementsImages/Alien.png");
         monsterViewer = new ElementViewer("ElementsImages/Monster.png");
+        shipViewer = new ElementViewer("ElementsImages/Ship.png");
     }
 
     @Override
@@ -40,6 +42,7 @@ public class GameViewer extends Viewer<Level>{
         return -1; // no input
     }
 
+    // we could draw  using composite DP
     @Override
     public void draw(Level model) {
         screen.clear();
@@ -50,6 +53,12 @@ public class GameViewer extends Viewer<Level>{
         alienViewer.draw(model.getAlien().getPosition(),
                 model.getAlien().getTransition_x(),
                 model.getAlien().getTransition_y(),
+                this.textGraphics);
+
+        //draw Ship
+        shipViewer.draw(model.getShip().getPosition(),
+                model.getShip().getTransition_x(),
+                model.getShip().getTransition_y(),
                 this.textGraphics);
 
         //draw tiles
