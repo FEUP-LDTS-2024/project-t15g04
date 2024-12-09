@@ -21,6 +21,7 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
     private ElementViewer shipViewer;
+    private ElementViewer tile2Viewer;
 
     public GameViewer(TerminalScreen screen) throws IOException {
         super(screen);
@@ -29,6 +30,7 @@ public class GameViewer extends Viewer<Level>{
         alienViewer = new ElementViewer("ElementsImages/Alien.png");
         monsterViewer = new ElementViewer("ElementsImages/Monster.png");
         shipViewer = new ElementViewer("ElementsImages/Ship.png");
+        tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
     }
 
     @Override
@@ -65,10 +67,18 @@ public class GameViewer extends Viewer<Level>{
         for(int i=0;i<40;i++){
             for(int j=0;j<20;j++) {
                 if(model.getTiles()[j][i] != null){
-                    tileViewer.draw(model.getTiles()[j][i].getPosition(),
-                            model.getTiles()[j][i].getTransition_x(),
-                            model.getTiles()[j][i].getTransition_y(),
-                            this.textGraphics);
+                    if(j == 0 || model.getTiles()[j-1][i] == null) { // no block over -> grass
+                        tileViewer.draw(model.getTiles()[j][i].getPosition(),
+                                model.getTiles()[j][i].getTransition_x(),
+                                model.getTiles()[j][i].getTransition_y(),
+                                this.textGraphics);
+                    }
+                    else{
+                        tile2Viewer.draw(model.getTiles()[j][i].getPosition(),
+                                model.getTiles()[j][i].getTransition_x(),
+                                model.getTiles()[j][i].getTransition_y(),
+                                this.textGraphics);
+                    }
                 }
             }
         }
