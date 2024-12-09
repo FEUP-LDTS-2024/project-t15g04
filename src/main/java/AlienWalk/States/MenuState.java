@@ -33,7 +33,7 @@ public class MenuState extends State<Menu>{
 
         // Ensure the loop runs every 100 ms
         long elapsedTime = System.currentTimeMillis() - startTime;
-        long sleepTime = Math.max(0, 15 - elapsedTime); // Calculate remaining time
+        long sleepTime = Math.max(0, 12 - elapsedTime); // Calculate remaining time
         try {
             Thread.sleep(sleepTime); // Pause to maintain the desired interval
         } catch (InterruptedException ignored) {}

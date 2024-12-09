@@ -21,6 +21,7 @@ public class Level {
     private Monster[][] monsters;
     private Tile[][] tiles;
     private Ship ship;
+    private static final int MAX_LEVEL = 3;
 
     public Level(){
         which = 1;
@@ -34,6 +35,11 @@ public class Level {
     }
 
     public void populateLevel(String filePath){
+        //clear
+        alien = new Alien(0,0);
+        ship = new Ship(0,0);
+        monsters = new Monster[height][width];
+        tiles = new Tile[height][width];
         // Access the resource
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
              InputStreamReader reader = new InputStreamReader(inputStream);
@@ -84,9 +90,20 @@ public class Level {
         return false;
     }
 
-    public void nextLevel(){
+    public boolean alienInShip(){
+        if(alien.getPosition().equals(ship.getPosition())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean nextLevel(){
         which += 1;
+        if(which > MAX_LEVEL){
+            return false; // no more levels
+        }
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
+        return true;
     }
 
     public Alien getAlien() {

@@ -15,7 +15,7 @@ public class GameState extends State<Level>{
 
     public GameState(Level level, GameViewer gameViewer, GameController gameController){
         super(level, gameController, gameViewer);
-        this.model.populateLevel("Levels/TestLevel.txt");
+        //this.model.populateLevel("Levels/TestLevel.txt");
         frame = 0;
     }
 

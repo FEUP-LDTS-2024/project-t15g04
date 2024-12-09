@@ -62,6 +62,15 @@ public class GameController extends Controller<Level>{
             model.getAlien().down();
         }
 
+        // if(model.checkColision()) ...
+
+        if(model.alienInShip()){
+            if(!model.nextLevel()){ // no more levels
+                // show score
+                game.screen.close();
+                game.state = null;
+            }
+        }
 
         System.out.println(model.getAlien().getPosition().getX());
         System.out.println(model.getAlien().getPosition().getY());
