@@ -74,6 +74,10 @@ public class Level {
                         this.ship.getPosition().setX(i);
                         i += 1;
                         break;
+                    case  'M':
+                        this.monsters[j][i] = new Monster(i,j);
+                        i += 1;
+                        break;
                 }
                 System.out.print((char) character); // Print each character
             }

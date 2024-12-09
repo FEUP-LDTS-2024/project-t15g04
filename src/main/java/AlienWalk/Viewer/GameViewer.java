@@ -83,7 +83,17 @@ public class GameViewer extends Viewer<Level>{
             }
         }
         //draw monsters
+        for(int i=0;i<40;i++) {
+            for (int j = 0; j < 20; j++) {
+                if (model.getMonsters()[j][i] != null) {
+                    monsterViewer.draw(model.getMonsters()[j][i].getPosition(),
+                            model.getMonsters()[j][i].getTransition_x(),
+                            model.getMonsters()[j][i].getTransition_y(),
+                            this.textGraphics);
 
+                }
+            }
+        }
 
         try{
             screen.refresh();
