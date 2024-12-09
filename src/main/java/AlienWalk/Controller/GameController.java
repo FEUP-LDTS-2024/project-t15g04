@@ -63,5 +63,18 @@ public class GameController extends Controller<Level>{
         }
         System.out.println(model.getAlien().getPosition().getX());
         System.out.println(model.getAlien().getPosition().getY());
+
+        // Check for collision with monsters
+        if (model.checkColision()) {
+            System.out.println("Collision detected! Game over.");
+            game.screen.close();
+            game.state = null;
+        }
+
+        // Move monsters after alien's turn
+        model.moveMonsters();
+
+        System.out.println(model.getAlien().getPosition().getX());
+        System.out.println(model.getAlien().getPosition().getY());
     }
 }
