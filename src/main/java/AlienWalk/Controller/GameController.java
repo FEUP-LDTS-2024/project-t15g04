@@ -2,6 +2,7 @@ package AlienWalk.Controller;
 
 import AlienWalk.Game;
 import AlienWalk.Model.Elements.Alien;
+import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Level;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -18,9 +19,6 @@ public class GameController extends Controller<Level>{
 
     @Override
     public void processInput(int inputOption, Game game, Level model) throws IOException {
-        System.out.print(model.getAlien().getPosition().getX());
-        System.out.print(" -------: ");
-        System.out.println(model.getAlien().getPosition().getY());
 
         switch(inputOption){
             case(0): // esc
@@ -64,6 +62,17 @@ public class GameController extends Controller<Level>{
 
         // if(model.checkColision()) ...
 
+        // move monsters
+        Monster monster;
+        for(int j=0; j<20; j++){
+            for(int i=0; i<40; i++){
+                monster = model.getMonsters()[j][i];
+                if(monster != null){
+                    monster.move(model.getTurningPoints()[j]);
+                }
+            }
+        }
+
         if(model.alienInShip()){
             if(!model.nextLevel()){ // no more levels
                 // show score
@@ -71,8 +80,5 @@ public class GameController extends Controller<Level>{
                 game.state = null;
             }
         }
-
-        System.out.println(model.getAlien().getPosition().getX());
-        System.out.println(model.getAlien().getPosition().getY());
     }
 }

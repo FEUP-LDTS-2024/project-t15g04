@@ -1,9 +1,6 @@
 package AlienWalk.Model;
 
-import AlienWalk.Model.Elements.Alien;
-import AlienWalk.Model.Elements.Monster;
-import AlienWalk.Model.Elements.Ship;
-import AlienWalk.Model.Elements.Tile;
+import AlienWalk.Model.Elements.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +17,7 @@ public class Level {
     private Alien alien;
     private Monster[][] monsters;
     private Tile[][] tiles;
+    private TurningPoint[][] turningPoints;
     private Ship ship;
     private static final int MAX_LEVEL = 3;
 
@@ -31,6 +29,7 @@ public class Level {
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
+        turningPoints = new TurningPoint[height][width];
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
     }
 
@@ -74,8 +73,12 @@ public class Level {
                         this.ship.getPosition().setX(i);
                         i += 1;
                         break;
-                    case  'M':
+                    case 'M': //monster
                         this.monsters[j][i] = new Monster(i,j);
+                        i += 1;
+                        break;
+                    case 'P': //turning Point
+                        this.turningPoints[j][i] = new TurningPoint(i,j);
                         i += 1;
                         break;
                 }
@@ -124,6 +127,10 @@ public class Level {
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    public TurningPoint[][] getTurningPoints(){
+        return turningPoints;
     }
 
     public boolean isTileAbove(){
