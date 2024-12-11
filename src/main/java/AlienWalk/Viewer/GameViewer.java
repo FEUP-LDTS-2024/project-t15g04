@@ -20,6 +20,7 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer tileViewer;
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
+    private ElementViewer spikeViewer;
     private ElementViewer shipViewer;
     private ElementViewer tile2Viewer;
 
@@ -29,6 +30,7 @@ public class GameViewer extends Viewer<Level>{
         tileViewer = new ElementViewer("ElementsImages/Tile.png");
         alienViewer = new ElementViewer("ElementsImages/Alien.png");
         monsterViewer = new ElementViewer("ElementsImages/Monster.png");
+        spikeViewer = new ElementViewer ("ElementsImages/Spike.png");
         shipViewer = new ElementViewer("ElementsImages/Ship.png");
         tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
     }
@@ -94,6 +96,18 @@ public class GameViewer extends Viewer<Level>{
                 }
             }
         }
+        // Draw spikes
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (model.getSpikes()[j][i] != null) {
+                    spikeViewer.draw(model.getSpikes()[j][i].getPosition(),
+                            model.getSpikes()[j][i].getTransition_x(),
+                            model.getSpikes()[j][i].getTransition_y(),
+                            this.textGraphics);
+                }
+            }
+        }
+
 
         try{
             screen.refresh();

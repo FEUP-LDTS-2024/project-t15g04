@@ -16,6 +16,7 @@ public class Level {
     private int height;
     private Alien alien;
     private Monster[][] monsters;
+    private Spike [][] spikes;
     private Tile[][] tiles;
     private TurningPoint[][] turningPoints;
     private Ship ship;
@@ -28,6 +29,7 @@ public class Level {
         alien = new Alien(0,0);
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
+        spikes = new Spike[height][width];
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
@@ -39,6 +41,7 @@ public class Level {
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
+        spikes = new Spike[height][width];
         // Access the resource
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
              InputStreamReader reader = new InputStreamReader(inputStream);
@@ -81,6 +84,10 @@ public class Level {
                         this.turningPoints[j][i] = new TurningPoint(i,j);
                         i += 1;
                         break;
+                    case 'K': // Spike
+                        this.spikes[j][i] = new Spike(i, j);
+                        i += 1;
+                        break;
                 }
                 System.out.print((char) character); // Print each character
             }
@@ -91,12 +98,6 @@ public class Level {
             System.out.println("File not found in resources/Levels.");
         }
     }
-
-    public boolean checkColision(){
-        // TO DO
-        return false;
-    }
-
     public boolean alienInShip(){
         if(alien.getPosition().equals(ship.getPosition())){
             return true;
@@ -112,6 +113,13 @@ public class Level {
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
         return true;
     }
+    public boolean checkCollisionWithSpikes() {
+        Position alienPosition = alien.getPosition();
+        int x = alienPosition.getX();
+        int y = alienPosition.getY();
+        return spikes[y][x] != null;
+    }
+
 
     public Alien getAlien() {
         return alien;
@@ -123,6 +131,10 @@ public class Level {
 
     public Monster[][] getMonsters() {
         return monsters;
+    }
+
+    public Spike[][] getSpikes() {
+        return spikes;
     }
 
     public Tile[][] getTiles() {

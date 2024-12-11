@@ -14,7 +14,7 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 
 
-                 S
-               TTTTT
-A           TTTTTTTTTTT
+                    K
+                  TTTTT
+A               TTTTTTTTTTT         S
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT

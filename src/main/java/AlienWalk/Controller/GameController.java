@@ -60,6 +60,14 @@ public class GameController extends Controller<Level>{
             model.getAlien().down();
         }
 
+        // Check collision with spikes
+        if (model.checkCollisionWithSpikes()) {
+            System.out.println("Game Over: Alien hit a spike!");
+            game.screen.close();
+            game.state = null;
+            return;
+        }
+
         // if(model.checkColision()) ...
 
         // move monsters
