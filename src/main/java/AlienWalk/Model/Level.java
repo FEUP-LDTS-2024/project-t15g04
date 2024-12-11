@@ -6,12 +6,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.AbstractList;
-import java.util.Arrays;
-import java.util.List;
+
+import static java.lang.Math.abs;
 
 public class Level {
-    private int which; // in constructor
+    public int which; // in constructor
     private int width;
     private int height;
     private Alien alien;
@@ -49,8 +48,6 @@ public class Level {
             int i = 0;
             int j = 0;
             while ((character = bufferedReader.read()) != -1) {
-                System.out.println(i);
-                System.out.println(j);
                 switch((char) character){
                     case '\n':
                         j += 1;
@@ -82,7 +79,6 @@ public class Level {
                         i += 1;
                         break;
                 }
-                System.out.print((char) character); // Print each character
             }
 
         } catch (IOException e) {
@@ -93,7 +89,50 @@ public class Level {
     }
 
     public boolean checkColision(){
-        // TO DO
+        Monster monster;
+        for(int j=0;j<20;j++){
+            for(int i=0;i<40;i++){
+                if(monsters[j][i] != null){
+                    monster = monsters[j][i];
+                    if(monster.getPosY() - alien.getPosY() == 0){ //same y
+                        switch(alien.getPosX() - monster.getPosX()){
+                            case(-2):
+                                if(alien.getTransitionX() - monster.getTransitionX() > 8) {return true;}
+                                break;
+                            case(-1):
+                                if(alien.getTransitionX() - monster.getTransitionX() > 0) {return true;}
+                                break;
+                            case(0):
+                                if(!(abs(alien.getTransitionX() - monster.getTransitionX()) > 0)) {return true;}
+                                break;
+                            case(1):
+                                if(alien.getTransitionX() - monster.getTransitionX() < 0) {return true;}
+                                break;
+                            case(2):
+                                if(alien.getTransitionX() - monster.getTransitionX() < -8) {
+//                                    System.out.println("option 2");
+//                                    System.out.println("-: " + String.valueOf(alien.getPosX() - monster.getPosX()));
+//                                    System.out.println("A pos: " + String.valueOf(alien.getPosX()) + ":" +String.valueOf(alien.getPosY()));
+//                                    System.out.println("A tra: " + String.valueOf(alien.getTransitionX()) + ":" +String.valueOf(alien.getTransitionY()));
+//                                    System.out.println("M pos: " + String.valueOf(monster.getPosX()) + ":" +String.valueOf(monster.getPosY()));
+//                                    System.out.println("M tra: " + String.valueOf(monster.getTransitionX()) + ":" +String.valueOf(monster.getTransitionY()));
+                                    return true;}
+                                break;
+                            default:
+                                break;
+
+                        }
+                    }
+
+                    if(monster.getPosY() - alien.getPosY() == 1){ //monster below
+
+                    }
+                    if(monster.getPosY() - alien.getPosY() == -1){ //monster above
+
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -135,10 +174,10 @@ public class Level {
 
     public boolean isTileAbove(){
         boolean tmp = false;
-        if(alien.getTransition_x()>0){
+        if(alien.getTransitionX()>0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_x()<0){
+        if(alien.getTransitionX()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -146,12 +185,12 @@ public class Level {
     }
 
     public boolean isTileBelow(){
-        if(alien.getTransition_y() < 0) return false;
+        if(alien.getTransitionY() < 0) return false;
         boolean tmp = false;
-        if(alien.getTransition_x()>0){
+        if(alien.getTransitionX()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_x()<0){
+        if(alien.getTransitionX()<0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -159,14 +198,14 @@ public class Level {
     }
 
     public boolean isTileOnLeft(){
-        if(alien.getTransition_x() > 0) return false;
+        if(alien.getTransitionX() > 0) return false;
         boolean tmp = false;
         if(alien.getPosition().getX() == 0) return true;
 
-        if(alien.getTransition_y()>0){
+        if(alien.getTransitionY()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
         }
-        if(alien.getTransition_y()<0){
+        if(alien.getTransitionY()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -174,14 +213,14 @@ public class Level {
     }
 
     public boolean isTileOnRight(){
-        if(alien.getTransition_x() < 0) return false;
+        if(alien.getTransitionX() < 0) return false;
         if(alien.getPosition().getX() == width-1) return true;
 
         boolean tmp = false;
-        if(alien.getTransition_y()>0){
+        if(alien.getTransitionY()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_y()<0){
+        if(alien.getTransitionY()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
         }
 

@@ -28,8 +28,6 @@ public class GameState extends State<Level>{
     @Override
     public void step(Game game) {
         viewer.draw(model);
-
-        System.out.println("frame: " + frame);
         frame += 1;
         long startTime = System.currentTimeMillis(); // Record the start time
 

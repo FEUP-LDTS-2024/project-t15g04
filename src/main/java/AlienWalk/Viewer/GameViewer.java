@@ -1,15 +1,8 @@
 package AlienWalk.Viewer;
 
-import AlienWalk.Model.Elements.Tile;
 import AlienWalk.Model.Level;
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
@@ -53,14 +46,14 @@ public class GameViewer extends Viewer<Level>{
 
         //draw Alien
         alienViewer.draw(model.getAlien().getPosition(),
-                model.getAlien().getTransition_x(),
-                model.getAlien().getTransition_y(),
+                model.getAlien().getTransitionX(),
+                model.getAlien().getTransitionY(),
                 this.textGraphics);
 
         //draw Ship
         shipViewer.draw(model.getShip().getPosition(),
-                model.getShip().getTransition_x(),
-                model.getShip().getTransition_y(),
+                model.getShip().getTransitionX(),
+                model.getShip().getTransitionY(),
                 this.textGraphics);
 
         //draw tiles
@@ -69,14 +62,14 @@ public class GameViewer extends Viewer<Level>{
                 if(model.getTiles()[j][i] != null){
                     if(j == 0 || model.getTiles()[j-1][i] == null) { // no block over -> grass
                         tileViewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransition_x(),
-                                model.getTiles()[j][i].getTransition_y(),
+                                model.getTiles()[j][i].getTransitionX(),
+                                model.getTiles()[j][i].getTransitionY(),
                                 this.textGraphics);
                     }
                     else{
                         tile2Viewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransition_x(),
-                                model.getTiles()[j][i].getTransition_y(),
+                                model.getTiles()[j][i].getTransitionX(),
+                                model.getTiles()[j][i].getTransitionY(),
                                 this.textGraphics);
                     }
                 }
@@ -87,8 +80,8 @@ public class GameViewer extends Viewer<Level>{
             for (int j = 0; j < 20; j++) {
                 if (model.getMonsters()[j][i] != null) {
                     monsterViewer.draw(model.getMonsters()[j][i].getPosition(),
-                            model.getMonsters()[j][i].getTransition_x(),
-                            model.getMonsters()[j][i].getTransition_y(),
+                            model.getMonsters()[j][i].getTransitionX(),
+                            model.getMonsters()[j][i].getTransitionY(),
                             this.textGraphics);
 
                 }

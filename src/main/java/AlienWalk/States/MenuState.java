@@ -19,13 +19,11 @@ public class MenuState extends State<Menu>{
 
     @Override
     public void step(Game game) {
-        System.out.println("MenuStep");
         viewer.draw(model);
 
         long startTime = System.currentTimeMillis();
 
         int inputOption = viewer.read();
-        System.out.println("menuStep inputOption = " + String.valueOf(inputOption));
         try {
             controller.processInput(inputOption, game, model);
         } catch (IOException ignored) {

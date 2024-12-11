@@ -61,7 +61,6 @@ public abstract class Viewer<T> {
         @Override
         public void keyPressed(KeyEvent keyEvent) {
             int code = keyEvent.getKeyCode();
-            System.out.println("key pressed = " + String.valueOf(code));
             switch(code){
                 case(VK_LEFT):
                     left = true;

@@ -23,8 +23,6 @@ public class MenuViewer extends Viewer<Menu> {
 
     @Override
     public int read(){
-        System.out.println("menu read vals: " + String.valueOf(quit)+ String.valueOf(up)
-        + String.valueOf(down)+ String.valueOf(enter));
         if(quit) return 0;
         if(up) return 1;
         if(down) return 2;

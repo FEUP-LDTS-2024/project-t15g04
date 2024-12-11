@@ -16,7 +16,7 @@ public class Element {
         return this.position;
     }
 
-    public int getTransition_x() {
+    public int getTransitionX() {
         return transition_x;
     }
 
@@ -24,7 +24,7 @@ public class Element {
         this.transition_x = transition_x;
     }
 
-    public int getTransition_y() {
+    public int getTransitionY() {
         return transition_y;
     }
 
@@ -59,5 +59,13 @@ public class Element {
             position.increaseX();
             transition_x = 0;
         }
+    }
+
+    public int getPosX(){
+        return this.position.getX();
+    }
+
+    public int getPosY(){
+        return this.position.getY();
     }
 }
