@@ -22,6 +22,8 @@ public class GameController extends Controller<Level>{
 
         switch(inputOption){
             case(0): // esc
+                System.out.println(String.valueOf(model.getAlien().getPosX()) +":"+ String.valueOf(model.getAlien().getPosY()));
+                System.out.println(String.valueOf(model.getAlien().getTransitionX())  +":"+ String.valueOf(model.getAlien().getTransitionY()));
                 game.screen.close();
                 game.state = null;
                 break;
@@ -61,12 +63,12 @@ public class GameController extends Controller<Level>{
         }
 
         // Check collision with spikes
-        if (model.checkCollisionWithSpikes()) {
-            System.out.println("Game Over: Alien hit a spike!");
-            game.screen.close();
-            game.state = null;
-            return;
-        }
+//        if (model.checkCollisionWithSpikes()) {
+//            System.out.println("Game Over: Alien hit a spike!");
+//            game.screen.close();
+//            game.state = null;
+//            return;
+//        }
 
         // if(model.checkColision()) ...
 
@@ -87,6 +89,9 @@ public class GameController extends Controller<Level>{
                 game.screen.close();
                 game.state = null;
             }
+        }
+        if(model.checkCollision()){
+            model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt" );
         }
     }
 }

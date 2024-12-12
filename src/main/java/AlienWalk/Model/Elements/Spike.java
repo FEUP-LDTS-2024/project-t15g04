@@ -5,8 +5,8 @@ public class Spike extends Element {
         super(x, y);
     }
 
-    public boolean collidesWith(Alien alien) {
-        // Check if the alien's position matches the spike's position
-        return this.getPosition().equals(alien.getPosition());
-    }
+//    public boolean collidesWith(Alien alien) {
+//        // Check if the alien's position matches the spike's position
+//        return this.getPosition().equals(alien.getPosition());
+//    }
 }

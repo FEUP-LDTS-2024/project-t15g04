@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Level {
-    private int which; // in constructor
+    public int which; // in constructor
     private int width;
     private int height;
     private Alien alien;
@@ -98,6 +98,8 @@ public class Level {
             System.out.println("File not found in resources/Levels.");
         }
     }
+
+    // now we can use Element.checCollision
     public boolean alienInShip(){
         if(alien.getPosition().equals(ship.getPosition())){
             return true;
@@ -113,13 +115,6 @@ public class Level {
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
         return true;
     }
-    public boolean checkCollisionWithSpikes() {
-        Position alienPosition = alien.getPosition();
-        int x = alienPosition.getX();
-        int y = alienPosition.getY();
-        return spikes[y][x] != null;
-    }
-
 
     public Alien getAlien() {
         return alien;
@@ -147,10 +142,10 @@ public class Level {
 
     public boolean isTileAbove(){
         boolean tmp = false;
-        if(alien.getTransition_x()>0){
+        if(alien.getTransitionX()>0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_x()<0){
+        if(alien.getTransitionX()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -158,12 +153,12 @@ public class Level {
     }
 
     public boolean isTileBelow(){
-        if(alien.getTransition_y() < 0) return false;
+        if(alien.getTransitionY() < 0) return false;
         boolean tmp = false;
-        if(alien.getTransition_x()>0){
+        if(alien.getTransitionX()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_x()<0){
+        if(alien.getTransitionX()<0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -171,14 +166,14 @@ public class Level {
     }
 
     public boolean isTileOnLeft(){
-        if(alien.getTransition_x() > 0) return false;
+        if(alien.getTransitionX() > 0) return false;
         boolean tmp = false;
         if(alien.getPosition().getX() == 0) return true;
 
-        if(alien.getTransition_y()>0){
+        if(alien.getTransitionY()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()-1] != null;
         }
-        if(alien.getTransition_y()<0){
+        if(alien.getTransitionY()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()-1] != null;
         }
 
@@ -186,17 +181,47 @@ public class Level {
     }
 
     public boolean isTileOnRight(){
-        if(alien.getTransition_x() < 0) return false;
+        if(alien.getTransitionX() < 0) return false;
         if(alien.getPosition().getX() == width-1) return true;
 
         boolean tmp = false;
-        if(alien.getTransition_y()>0){
+        if(alien.getTransitionY()>0){
             tmp = tiles[alien.getPosition().getY() + 1][alien.getPosition().getX()+1] != null;
         }
-        if(alien.getTransition_y()<0){
+        if(alien.getTransitionY()<0){
             tmp = tiles[alien.getPosition().getY() - 1][alien.getPosition().getX()+1] != null;
         }
 
         return tmp || (tiles[alien.getPosition().getY()][alien.getPosition().getX()+1] != null);
+    }
+
+    public boolean checkCollision(){
+        return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
+    }
+
+    public boolean checkCollisionWithSpikes() {
+        for(int i=0;i<40;i++){
+            for(int j=0;j<20;j++){
+                if(spikes[j][i] != null){
+                    if(spikes[j][i].collidesWith(this.alien)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkCollisionWithMonsters() {
+        for(int i=0;i<40;i++){
+            for(int j=0;j<20;j++){
+                if(monsters[j][i] != null){
+                    if(monsters[j][i].collidesWith(this.alien)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

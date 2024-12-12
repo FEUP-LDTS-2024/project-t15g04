@@ -55,14 +55,14 @@ public class GameViewer extends Viewer<Level>{
 
         //draw Alien
         alienViewer.draw(model.getAlien().getPosition(),
-                model.getAlien().getTransition_x(),
-                model.getAlien().getTransition_y(),
+                model.getAlien().getTransitionX(),
+                model.getAlien().getTransitionY(),
                 this.textGraphics);
 
         //draw Ship
         shipViewer.draw(model.getShip().getPosition(),
-                model.getShip().getTransition_x(),
-                model.getShip().getTransition_y(),
+                model.getShip().getTransitionX(),
+                model.getShip().getTransitionY(),
                 this.textGraphics);
 
         //draw tiles
@@ -71,14 +71,14 @@ public class GameViewer extends Viewer<Level>{
                 if(model.getTiles()[j][i] != null){
                     if(j == 0 || model.getTiles()[j-1][i] == null) { // no block over -> grass
                         tileViewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransition_x(),
-                                model.getTiles()[j][i].getTransition_y(),
+                                model.getTiles()[j][i].getTransitionX(),
+                                model.getTiles()[j][i].getTransitionY(),
                                 this.textGraphics);
                     }
                     else{
                         tile2Viewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransition_x(),
-                                model.getTiles()[j][i].getTransition_y(),
+                                model.getTiles()[j][i].getTransitionX(),
+                                model.getTiles()[j][i].getTransitionY(),
                                 this.textGraphics);
                     }
                 }
@@ -89,8 +89,8 @@ public class GameViewer extends Viewer<Level>{
             for (int j = 0; j < 20; j++) {
                 if (model.getMonsters()[j][i] != null) {
                     monsterViewer.draw(model.getMonsters()[j][i].getPosition(),
-                            model.getMonsters()[j][i].getTransition_x(),
-                            model.getMonsters()[j][i].getTransition_y(),
+                            model.getMonsters()[j][i].getTransitionX(),
+                            model.getMonsters()[j][i].getTransitionY(),
                             this.textGraphics);
 
                 }
@@ -101,8 +101,8 @@ public class GameViewer extends Viewer<Level>{
             for (int j = 0; j < 20; j++) {
                 if (model.getSpikes()[j][i] != null) {
                     spikeViewer.draw(model.getSpikes()[j][i].getPosition(),
-                            model.getSpikes()[j][i].getTransition_x(),
-                            model.getSpikes()[j][i].getTransition_y(),
+                            model.getSpikes()[j][i].getTransitionX(),
+                            model.getSpikes()[j][i].getTransitionY(),
                             this.textGraphics);
                 }
             }

@@ -1,5 +1,7 @@
 package AlienWalk.Model.Elements;
 
+import static java.lang.Math.abs;
+
 public class Element {
     private Position position; //top left corner
     private int transition_x;
@@ -16,19 +18,19 @@ public class Element {
         return this.position;
     }
 
-    public int getTransition_x() {
+    public int getTransitionX() {
         return transition_x;
     }
 
-    public void setTransition_x(int transition_x) {
+    public void setTransitionX(int transition_x) {
         this.transition_x = transition_x;
     }
 
-    public int getTransition_y() {
+    public int getTransitionY() {
         return transition_y;
     }
 
-    public void setTransition_y(int transition_y) {
+    public void setTransitionY(int transition_y) {
         this.transition_y = transition_y;
     }
 
@@ -59,5 +61,64 @@ public class Element {
             position.increaseX();
             transition_x = 0;
         }
+    }
+
+    public int getPosX(){
+        return this.position.getX();
+    }
+
+    public int getPosY(){
+        return this.position.getY();
+    }
+
+    private boolean checkCollisionOnX(Element element) {
+        switch (element.getPosX() - this.getPosX()) {
+            case (-2):
+                if (element.getTransitionX() - this.getTransitionX() > 8) {
+                    return true;
+                }
+                break;
+            case (-1):
+                if (element.getTransitionX() - this.getTransitionX() > 0) {
+                    return true;
+                }
+                break;
+            case (0):
+                if (!(abs(element.getTransitionX() - this.getTransitionX()) >= 8)) {
+                    return true;
+                }
+                break;
+            case (1):
+                if (element.getTransitionX() - this.getTransitionX() < 0) {
+                    return true;
+                }
+                break;
+            case (2):
+                if (element.getTransitionX() - this.getTransitionX() < -8) {
+                    return true;
+                }
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+
+    public boolean collidesWith(Element element){
+        if(this.getPosY() - element.getPosY() == 0){ //same y
+            return checkCollisionOnX(element);
+        }
+        if(this.getPosY() - element.getPosY() == 1){ //this below
+            if(element.getTransitionY() > 0){ //element transitions into this y
+                return checkCollisionOnX(element);
+            }
+        }
+        if(this.getPosY() - element.getPosY() == -1){ //this above
+            if(element.getTransitionY() < 0){ //element transitions into this y
+                return checkCollisionOnX(element);
+            }
+        }
+
+        return false;
     }
 }
