@@ -45,6 +45,7 @@ public class GameController extends Controller<Level>{
         }
 
         if(model.getAlien().getJumpState()>0){ // alien going up until possible
+            System.out.println("alien up");
             if(model.isTileAbove()){
                 model.getAlien().setJumpState(0);
             }
@@ -55,6 +56,7 @@ public class GameController extends Controller<Level>{
         }
 
         if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // alien falling
+            System.out.println("alien down");
             model.getAlien().down();
         }
 
@@ -78,7 +80,7 @@ public class GameController extends Controller<Level>{
                 game.state = null;
             }
         }
-        if(model.checkColision()){
+        if(model.checkCollision()){
             model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt" );
         }
     }

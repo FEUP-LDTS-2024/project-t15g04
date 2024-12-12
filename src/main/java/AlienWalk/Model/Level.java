@@ -6,8 +6,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import static java.lang.Math.abs;
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Level {
     public int which; // in constructor
@@ -15,6 +16,7 @@ public class Level {
     private int height;
     private Alien alien;
     private Monster[][] monsters;
+    private Spike [][] spikes;
     private Tile[][] tiles;
     private TurningPoint[][] turningPoints;
     private Ship ship;
@@ -27,6 +29,7 @@ public class Level {
         alien = new Alien(0,0);
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
+        spikes = new Spike[height][width];
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
@@ -38,6 +41,7 @@ public class Level {
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
+        spikes = new Spike[height][width];
         // Access the resource
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
              InputStreamReader reader = new InputStreamReader(inputStream);
@@ -48,6 +52,8 @@ public class Level {
             int i = 0;
             int j = 0;
             while ((character = bufferedReader.read()) != -1) {
+                System.out.println(i);
+                System.out.println(j);
                 switch((char) character){
                     case '\n':
                         j += 1;
@@ -78,7 +84,12 @@ public class Level {
                         this.turningPoints[j][i] = new TurningPoint(i,j);
                         i += 1;
                         break;
+                    case 'K': // Spike
+                        this.spikes[j][i] = new Spike(i, j);
+                        i += 1;
+                        break;
                 }
+                System.out.print((char) character); // Print each character
             }
 
         } catch (IOException e) {
@@ -86,54 +97,6 @@ public class Level {
         } catch (NullPointerException e) {
             System.out.println("File not found in resources/Levels.");
         }
-    }
-    public boolean checkCollisionOnX(Alien alien, Monster monster){
-        switch(alien.getPosX() - monster.getPosX()){
-            case(-2):
-                if(alien.getTransitionX() - monster.getTransitionX() > 8) {return true;}
-                break;
-            case(-1):
-                if(alien.getTransitionX() - monster.getTransitionX() > 0) {return true;}
-                break;
-            case(0):
-                if(!(abs(alien.getTransitionX() - monster.getTransitionX()) > 0)) {return true;}
-                break;
-            case(1):
-                if(alien.getTransitionX() - monster.getTransitionX() < 0) {return true;}
-                break;
-            case(2):
-                if(alien.getTransitionX() - monster.getTransitionX() < -8) {return true;}
-                break;
-            default:
-                break;
-
-        }
-        return false;
-    }
-
-    public boolean checkColision(){
-        Monster monster;
-        for(int j=0;j<20;j++){
-            for(int i=0;i<40;i++){
-                if(monsters[j][i] != null){
-                    monster = monsters[j][i];
-                    if(monster.getPosY() - alien.getPosY() == 0){ //same y
-                        return checkCollisionOnX(alien, monster);
-                    }
-                    if(monster.getPosY() - alien.getPosY() == 1){ //monster below
-                        if(alien.getTransitionY() > 0){ //alien transitions into monsters y
-                            return checkCollisionOnX(alien, monster);
-                        }
-                    }
-                    if(monster.getPosY() - alien.getPosY() == -1){ //monster above
-                        if(alien.getTransitionY() < 0){ //alien transitions into monsters y
-                            return checkCollisionOnX(alien, monster);
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public boolean alienInShip(){
@@ -162,6 +125,10 @@ public class Level {
 
     public Monster[][] getMonsters() {
         return monsters;
+    }
+
+    public Spike[][] getSpikes() {
+        return spikes;
     }
 
     public Tile[][] getTiles() {
@@ -225,5 +192,35 @@ public class Level {
         }
 
         return tmp || (tiles[alien.getPosition().getY()][alien.getPosition().getX()+1] != null);
+    }
+
+    public boolean checkCollision(){
+        return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
+    }
+
+    public boolean checkCollisionWithSpikes() {
+        for(int i=0;i<40;i++){
+            for(int j=0;j<20;j++){
+                if(spikes[j][i] != null){
+                    if(spikes[j][i].collidesWith(this.alien)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkCollisionWithMonsters() {
+        for(int i=0;i<40;i++){
+            for(int j=0;j<20;j++){
+                if(monsters[j][i] != null){
+                    if(monsters[j][i].collidesWith(this.alien)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
