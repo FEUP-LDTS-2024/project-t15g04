@@ -10,10 +10,6 @@ public class Alien extends Element {
         super(x, y);
     }
 
-//    public void updateJumpState(){
-//        jumpState -= 1;
-//    }
-
     public int getJumpState(){
         return jumpState;
     }

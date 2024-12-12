@@ -72,8 +72,6 @@ public class Game {
     public void run(){
         while(state != null){
             state.step(this);
-            //System.out.println("running");
         }
-        //System.out.println("END");
     }
 }

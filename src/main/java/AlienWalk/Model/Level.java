@@ -52,8 +52,7 @@ public class Level {
             int i = 0;
             int j = 0;
             while ((character = bufferedReader.read()) != -1) {
-                System.out.println(i);
-                System.out.println(j);
+
                 switch((char) character){
                     case '\n':
                         j += 1;
@@ -89,7 +88,6 @@ public class Level {
                         i += 1;
                         break;
                 }
-                System.out.print((char) character); // Print each character
             }
 
         } catch (IOException e) {
