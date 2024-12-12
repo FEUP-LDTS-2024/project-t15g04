@@ -87,6 +87,29 @@ public class Level {
             System.out.println("File not found in resources/Levels.");
         }
     }
+    public boolean checkCollisionOnX(Alien alien, Monster monster){
+        switch(alien.getPosX() - monster.getPosX()){
+            case(-2):
+                if(alien.getTransitionX() - monster.getTransitionX() > 8) {return true;}
+                break;
+            case(-1):
+                if(alien.getTransitionX() - monster.getTransitionX() > 0) {return true;}
+                break;
+            case(0):
+                if(!(abs(alien.getTransitionX() - monster.getTransitionX()) > 0)) {return true;}
+                break;
+            case(1):
+                if(alien.getTransitionX() - monster.getTransitionX() < 0) {return true;}
+                break;
+            case(2):
+                if(alien.getTransitionX() - monster.getTransitionX() < -8) {return true;}
+                break;
+            default:
+                break;
+
+        }
+        return false;
+    }
 
     public boolean checkColision(){
         Monster monster;
@@ -95,40 +118,17 @@ public class Level {
                 if(monsters[j][i] != null){
                     monster = monsters[j][i];
                     if(monster.getPosY() - alien.getPosY() == 0){ //same y
-                        switch(alien.getPosX() - monster.getPosX()){
-                            case(-2):
-                                if(alien.getTransitionX() - monster.getTransitionX() > 8) {return true;}
-                                break;
-                            case(-1):
-                                if(alien.getTransitionX() - monster.getTransitionX() > 0) {return true;}
-                                break;
-                            case(0):
-                                if(!(abs(alien.getTransitionX() - monster.getTransitionX()) > 0)) {return true;}
-                                break;
-                            case(1):
-                                if(alien.getTransitionX() - monster.getTransitionX() < 0) {return true;}
-                                break;
-                            case(2):
-                                if(alien.getTransitionX() - monster.getTransitionX() < -8) {
-//                                    System.out.println("option 2");
-//                                    System.out.println("-: " + String.valueOf(alien.getPosX() - monster.getPosX()));
-//                                    System.out.println("A pos: " + String.valueOf(alien.getPosX()) + ":" +String.valueOf(alien.getPosY()));
-//                                    System.out.println("A tra: " + String.valueOf(alien.getTransitionX()) + ":" +String.valueOf(alien.getTransitionY()));
-//                                    System.out.println("M pos: " + String.valueOf(monster.getPosX()) + ":" +String.valueOf(monster.getPosY()));
-//                                    System.out.println("M tra: " + String.valueOf(monster.getTransitionX()) + ":" +String.valueOf(monster.getTransitionY()));
-                                    return true;}
-                                break;
-                            default:
-                                break;
-
+                        return checkCollisionOnX(alien, monster);
+                    }
+                    if(monster.getPosY() - alien.getPosY() == 1){ //monster below
+                        if(alien.getTransitionY() > 0){ //alien transitions into monsters y
+                            return checkCollisionOnX(alien, monster);
                         }
                     }
-
-                    if(monster.getPosY() - alien.getPosY() == 1){ //monster below
-
-                    }
                     if(monster.getPosY() - alien.getPosY() == -1){ //monster above
-
+                        if(alien.getTransitionY() < 0){ //alien transitions into monsters y
+                            return checkCollisionOnX(alien, monster);
+                        }
                     }
                 }
             }
