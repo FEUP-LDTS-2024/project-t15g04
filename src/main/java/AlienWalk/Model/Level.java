@@ -98,10 +98,7 @@ public class Level {
     }
 
     public boolean alienInShip(){
-        if(alien.getPosition().equals(ship.getPosition())){
-            return true;
-        }
-        return false;
+        return ship.collidesWith(this.alien);
     }
 
     public boolean nextLevel(){
