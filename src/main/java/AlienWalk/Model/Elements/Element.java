@@ -73,7 +73,7 @@ public class Element {
         return this.position.getY();
     }
 
-    private boolean checkCollisionOnX(Element element) {
+    public boolean checkCollisionOnX(Element element) {
         switch (element.getPosX() - this.getPosX()) {
             case (-2):
                 if (element.getTransitionX() - this.getTransitionX() > 8) {
@@ -120,7 +120,6 @@ public class Element {
                 return checkCollisionOnX(element);
             }
         }
-
         return false;
     }
 }
