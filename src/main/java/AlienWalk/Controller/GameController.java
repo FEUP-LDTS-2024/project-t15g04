@@ -5,12 +5,13 @@ import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Level;
+import AlienWalk.States.OverMenuState;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
-public class GameController extends Controller<Level>{
+public class GameController extends Controller<Level> {
     int defaultJumpState;
 
     public GameController(){
@@ -19,7 +20,7 @@ public class GameController extends Controller<Level>{
 
     @Override
     public void processInput(int inputOption, Game game, Level model) throws IOException {
-
+        // Handle user inputs
         switch(inputOption){
             case(0): // esc
                 game.screen.close();
@@ -39,14 +40,15 @@ public class GameController extends Controller<Level>{
             case(4): // right
                 if(!model.isTileOnRight()) model.getAlien().right();
                 break;
-            case(5): //left
+            case(5): // left
                 if(!model.isTileOnLeft()) model.getAlien().left();
                 break;
         }
 
-        if(model.getAlien().getJumpState()>0){ // alien going up until possible
+        // Handle jump and fall mechanics for the alien
+        if(model.getAlien().getJumpState() > 0){ // Alien is jumping upwards
             if(model.isTileAbove()){
-                model.getAlien().setJumpState(0);
+                model.getAlien().setJumpState(0); // Stop jumping if it hits the ceiling
             }
             else{
                 model.getAlien().up();
@@ -54,14 +56,15 @@ public class GameController extends Controller<Level>{
             }
         }
 
-        if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // alien falling
+        // Handle alien falling if no surface below
+        if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // Alien is falling
             model.getAlien().down();
         }
 
-        // move monsters
+        // Move monsters based on level's turning points
         Monster monster;
-        for(int j=0; j<20; j++){
-            for(int i=0; i<40; i++){
+        for(int j = 0; j < 20; j++){
+            for(int i = 0; i < 40; i++){
                 monster = model.getMonsters()[j][i];
                 if(monster != null){
                     monster.move(model.getTurningPoints()[j]);
@@ -69,15 +72,30 @@ public class GameController extends Controller<Level>{
             }
         }
 
+        // Check if the alien reaches the ship to move to the next level
         if(model.alienInShip()){
-            if(!model.nextLevel()){ // no more levels
-                // show score
+            if(!model.nextLevel()){ // No more levels left
+                // Show the score or handle game over scenario
                 game.screen.close();
                 game.state = null;
             }
         }
+
+        // Check for collision with the environment (spikes, etc.)
+        if(model.checkCollisionWithSpikes()) {
+            // Transition to the OverMenuState after game over
+            try {
+                game.state = new OverMenuState(game); // Set the new state to OverMenuState
+            } catch (IOException e) {
+                game.screen.close(); // Close the screen if an error occurs
+                game.state = null; // Reset the game state
+            }
+            return; // Exit after transitioning to the OverMenuState
+        }
+
+        // Check for collision with other elements (if needed)
         if(model.checkCollision()){
-            model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt" );
+            model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt");
         }
     }
 }
