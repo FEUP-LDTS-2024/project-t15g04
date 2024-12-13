@@ -1,20 +1,20 @@
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
+A   P           M    P   M       P
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 
+   P     M       P        M  P    M    P
+   TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 
-
-
-
-
-
-
-
-
-
-
-                    K
-                  TTTTT
-A               TTTTTTTTTTT         S
+P          M    M        MP  KKK
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+                               T
+                               T
+     K  K                      T
+     TTTT                      T
+                  PM     M   MPT
+                  TTTTTTTTTTTTTT
+S
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
