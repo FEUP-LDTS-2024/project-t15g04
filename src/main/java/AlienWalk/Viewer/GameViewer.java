@@ -1,14 +1,14 @@
 package AlienWalk.Viewer;
 
 import AlienWalk.Model.Level;
+import AlienWalk.Model.Elements.Crystal;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
 
-public class GameViewer extends Viewer<Level>{
-    private Level level;
+public class GameViewer extends Viewer<Level> {
     private TextGraphics textGraphics;
     private ElementViewer tileViewer;
     private ElementViewer alienViewer;
@@ -16,6 +16,8 @@ public class GameViewer extends Viewer<Level>{
     private ElementViewer spikeViewer;
     private ElementViewer shipViewer;
     private ElementViewer tile2Viewer;
+    private ElementViewer crystalViewer; // New viewer for crystals
+    private int score;  // Field to store the score
 
     public GameViewer(TerminalScreen screen) throws IOException {
         super(screen);
@@ -23,52 +25,55 @@ public class GameViewer extends Viewer<Level>{
         tileViewer = new ElementViewer("ElementsImages/Tile.png");
         alienViewer = new ElementViewer("ElementsImages/Alien.png");
         monsterViewer = new ElementViewer("ElementsImages/Monster.png");
-        spikeViewer = new ElementViewer ("ElementsImages/Spike.png");
+        spikeViewer = new ElementViewer("ElementsImages/Spike.png");
         shipViewer = new ElementViewer("ElementsImages/Ship.png");
         tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
+        crystalViewer = new ElementViewer("ElementsImages/Crystal.png"); // Initialize crystal viewer
+        this.score = 0;  // Initialize the score
     }
 
     @Override
-    public int read(){
-        if(quit) return 0;
-        if((up && right && !left) || (jump && right && !left)) return 1;
-        if((up && left && !right) || (jump && left && !right)) return 2;
-        if(up || jump) return 3;
-        if(right && !left) return 4;
-        if(left && !right) return 5;
+    public int read() {
+        if (quit) return 0;
+        if ((up && right && !left) || (jump && right && !left)) return 1;
+        if ((up && left && !right) || (jump && left && !right)) return 2;
+        if (up || jump) return 3;
+        if (right && !left) return 4;
+        if (left && !right) return 5;
         return -1; // no input
     }
 
-    // we could draw  using composite DP
     @Override
     public void draw(Level model) {
         screen.clear();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de80"));
-        //textGraphics.fillRectangle(new TerminalPosition(0,0),new TerminalSize(40,20), ' ');
 
-        //draw Alien
+        // Draw the score at the top-left corner of the screen
+        textGraphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
+        textGraphics.putString(1, 1, "Score: " + score);  // Display score
+
+        // Draw Alien
         alienViewer.draw(model.getAlien().getPosition(),
                 model.getAlien().getTransitionX(),
                 model.getAlien().getTransitionY(),
                 this.textGraphics);
 
-        //draw Ship
+        // Draw Ship
         shipViewer.draw(model.getShip().getPosition(),
                 model.getShip().getTransitionX(),
                 model.getShip().getTransitionY(),
                 this.textGraphics);
 
-        //draw tiles
-        for(int i=0;i<40;i++){
-            for(int j=0;j<20;j++) {
-                if(model.getTiles()[j][i] != null){
-                    if(j == 0 || model.getTiles()[j-1][i] == null) { // no block over -> grass
+        // Draw tiles
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (model.getTiles()[j][i] != null) {
+                    if (j == 0 || model.getTiles()[j - 1][i] == null) { // no block over -> grass
                         tileViewer.draw(model.getTiles()[j][i].getPosition(),
                                 model.getTiles()[j][i].getTransitionX(),
                                 model.getTiles()[j][i].getTransitionY(),
                                 this.textGraphics);
-                    }
-                    else{
+                    } else {
                         tile2Viewer.draw(model.getTiles()[j][i].getPosition(),
                                 model.getTiles()[j][i].getTransitionX(),
                                 model.getTiles()[j][i].getTransitionY(),
@@ -77,18 +82,19 @@ public class GameViewer extends Viewer<Level>{
                 }
             }
         }
-        //draw monsters
-        for(int i=0;i<40;i++) {
+
+        // Draw monsters
+        for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 20; j++) {
                 if (model.getMonsters()[j][i] != null) {
                     monsterViewer.draw(model.getMonsters()[j][i].getPosition(),
                             model.getMonsters()[j][i].getTransitionX(),
                             model.getMonsters()[j][i].getTransitionY(),
                             this.textGraphics);
-
                 }
             }
         }
+
         // Draw spikes
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 20; j++) {
@@ -101,9 +107,16 @@ public class GameViewer extends Viewer<Level>{
             }
         }
 
+        // Draw crystals
+        for (Crystal crystal : model.getCrystals()) {
+            crystalViewer.draw(crystal.getPosition(),
+                    0, 0, // Crystals do not move, so no transition values
+                    this.textGraphics);
+        }
 
-        try{
+        try {
             screen.refresh();
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 }

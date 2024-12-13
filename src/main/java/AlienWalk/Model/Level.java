@@ -6,8 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.AbstractList;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Level {
@@ -20,6 +19,7 @@ public class Level {
     private Tile[][] tiles;
     private TurningPoint[][] turningPoints;
     private Ship ship;
+    private List<Crystal> crystals; // New list to hold crystals
     private static final int MAX_LEVEL = 3;
 
     public Level(){
@@ -32,27 +32,27 @@ public class Level {
         spikes = new Spike[height][width];
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
+        crystals = new ArrayList<>(); // Initialize the crystal list
         populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
     }
 
     public void populateLevel(String filePath){
-        //clear
+        // Clear previous elements
         alien = new Alien(0,0);
         ship = new Ship(0,0);
         monsters = new Monster[height][width];
         tiles = new Tile[height][width];
         spikes = new Spike[height][width];
-        // Access the resource
+        crystals.clear(); // Clear any existing crystals
+
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
              InputStreamReader reader = new InputStreamReader(inputStream);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
             int character;
-            // Read character by character
             int i = 0;
             int j = 0;
             while ((character = bufferedReader.read()) != -1) {
-
                 switch((char) character){
                     case '\n':
                         j += 1;
@@ -70,30 +70,31 @@ public class Level {
                         this.alien.getPosition().setX(i);
                         i += 1;
                         break;
-                    case 'S': //ship
+                    case 'S': // ship
                         this.ship.getPosition().setY(j);
                         this.ship.getPosition().setX(i);
                         i += 1;
                         break;
-                    case 'M': //monster
+                    case 'M': // monster
                         this.monsters[j][i] = new Monster(i,j);
                         i += 1;
                         break;
-                    case 'P': //turning Point
+                    case 'P': // turning point
                         this.turningPoints[j][i] = new TurningPoint(i,j);
                         i += 1;
                         break;
-                    case 'K': // Spike
+                    case 'K': // spike
                         this.spikes[j][i] = new Spike(i, j);
+                        i += 1;
+                        break;
+                    case 'C': // crystal (new symbol for crystal)
+                        this.crystals.add(new Crystal(i, j)); // Add crystal to the list
                         i += 1;
                         break;
                 }
             }
-
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            System.out.println("File not found in resources/Levels.");
         }
     }
 
@@ -132,6 +133,22 @@ public class Level {
 
     public TurningPoint[][] getTurningPoints(){
         return turningPoints;
+    }
+
+    public List<Crystal> getCrystals() {
+        return crystals;
+    }
+
+    // Check collision with crystals
+    public boolean checkCollisionWithCrystals() {
+        for (Crystal crystal : crystals) {
+            if (crystal.collidesWith(alien)) {
+                crystals.remove(crystal); // Remove the crystal once collected
+                alien.collectCrystal(); // Increment the collected crystals counter
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isTileAbove(){
@@ -190,7 +207,7 @@ public class Level {
     }
 
     public boolean checkCollision(){
-        return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
+        return (checkCollisionWithSpikes() || checkCollisionWithMonsters() || checkCollisionWithCrystals());
     }
 
     public boolean checkCollisionWithSpikes() {
