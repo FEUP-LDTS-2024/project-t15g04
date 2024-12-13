@@ -4,17 +4,17 @@ A   P           M    P   M       P
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 
-   P     M       P        M  P    M    P
+   P     M       P      M    P    M    P
    TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 
-P          M    M        MP  KKK
-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+P          M    M        MP  KKK    KKKK
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT    TTTT
                                T
-                               T
-     K  K                      T
-     TTTT                      T
-                  PM     M   MPT
+                               TKKK
+     K  K                      TTTT
+     TTTT         PM     M   MPT
                   TTTTTTTTTTTTTT
-S
+                                   KKKKK
+S                                 TTTTTT
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT

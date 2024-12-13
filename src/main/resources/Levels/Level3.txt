@@ -7,11 +7,11 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 TTTTTTTTTTTTTTTTTTTTTTTTTT         TT
                                    TT
                          P   M    PTT
-                         TTTTTTTTTTTT
-           K          TTTTTT
-           T             TT
-           TTTTT         T      P M    P
-                         T      TTTTTTTT
+      KKK K              TTTTTTTTTTTT
+   TTTTTTTTK          TTTTTT
+          TT             TT
+PM      P TTTTTT         T      P M    P
+TTTTTTTTTTT              T      TTTTTTTT
                          T
       P   M            MPT
       TTTTTTTTTTTTTTTTTTTT
