@@ -11,11 +11,7 @@ import com.googlecode.lanterna.input.KeyType;
 import java.io.IOException;
 
 public class GameController extends Controller<Level>{
-    int defaultJumpState;
-
-    public GameController(){
-        defaultJumpState = 5;
-    }
+    private boolean hittedTile = false;
 
     @Override
     public void processInput(int inputOption, Game game, Level model) throws IOException {
@@ -27,14 +23,23 @@ public class GameController extends Controller<Level>{
                 break;
             case(1): // up right
                 if(!model.isTileOnRight()) model.getAlien().right();
-                if(model.isTileBelow()) model.getAlien().start_jump();
+                if(model.isTileBelow()){
+                    model.getAlien().start_jump();
+                    hittedTile = false;
+                }
                 break;
             case(2): // up left
                 if(!model.isTileOnLeft()) model.getAlien().left();
-                if(model.isTileBelow()) model.getAlien().start_jump();
+                if(model.isTileBelow()){
+                    model.getAlien().start_jump();
+                    hittedTile = false;
+                }
                 break;
             case(3): // up
-                if(model.isTileBelow()) model.getAlien().start_jump();
+                if(model.isTileBelow()){
+                    model.getAlien().start_jump();
+                    hittedTile = false;
+                }
                 break;
             case(4): // right
                 if(!model.isTileOnRight()) model.getAlien().right();
@@ -44,14 +49,14 @@ public class GameController extends Controller<Level>{
                 break;
         }
 
-        if(model.getAlien().getJumpState()>0){ // alien going up until possible
+    if(model.getAlien().getJumpState()>0){ // alien going up until possible
             if(model.isTileAbove()){
-                model.getAlien().setJumpState(0);
+                hittedTile = true;
             }
-            else{
+            else if(!hittedTile){
                 model.getAlien().up();
-                model.getAlien().setJumpState(model.getAlien().getJumpState() - 1);
             }
+        model.getAlien().setJumpState(model.getAlien().getJumpState() - 1);
         }
 
         if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // alien falling

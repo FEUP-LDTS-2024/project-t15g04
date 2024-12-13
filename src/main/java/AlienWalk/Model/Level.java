@@ -23,7 +23,7 @@ public class Level {
     private static final int MAX_LEVEL = 3;
 
     public Level(){
-        which = 1;
+        which = 3;
         width = 40;
         height = 20;
         alien = new Alien(0,0);
