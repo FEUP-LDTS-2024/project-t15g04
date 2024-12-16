@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Level {
@@ -139,18 +140,6 @@ public class Level {
         return crystals;
     }
 
-    // Check collision with crystals
-    public boolean checkCollisionWithCrystals() {
-        for (Crystal crystal : crystals) {
-            if (crystal.collidesWith(alien)) {
-                crystals.remove(crystal); // Remove the crystal once collected
-                alien.collectCrystal(); // Increment the collected crystals counter
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean isTileAbove(){
         boolean tmp = false;
         if(alien.getTransitionX()>0){
@@ -208,6 +197,17 @@ public class Level {
 
     public boolean checkCollision(){
         return (checkCollisionWithSpikes() || checkCollisionWithMonsters() || checkCollisionWithCrystals());
+    }
+    public boolean checkCollisionWithCrystals() {
+        Iterator<Crystal> iterator = crystals.iterator();
+        while (iterator.hasNext()) {
+            Crystal crystal = iterator.next();
+            if (crystal.collidesWith(alien)) {
+                iterator.remove();
+                break;
+            }
+        }
+        return false;
     }
 
     public boolean checkCollisionWithSpikes() {
