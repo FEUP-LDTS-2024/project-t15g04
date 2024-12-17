@@ -5,6 +5,8 @@ import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Level;
+import AlienWalk.Viewer.GameViewer;
+import AlienWalk.States.OverMenuState;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -15,9 +17,9 @@ public class GameController extends Controller<Level>{
 
     @Override
     public void processInput(int inputOption, Game game, Level model) throws IOException {
-
-        switch(inputOption){
-            case(0): // esc
+        // Handle user inputs
+        switch (inputOption) {
+            case (0): // esc
                 game.screen.close();
                 game.state = null;
                 break;
@@ -36,16 +38,13 @@ public class GameController extends Controller<Level>{
                 }
                 break;
             case(3): // up
-                if(model.isTileBelow()){
-                    model.getAlien().start_jump();
-                    hittedTile = false;
-                }
+                if(model.isTileBelow()) model.getAlien().start_jump();
                 break;
-            case(4): // right
-                if(!model.isTileOnRight()) model.getAlien().right();
+            case (4): // right
+                if (!model.isTileOnRight()) model.getAlien().right();
                 break;
-            case(5): //left
-                if(!model.isTileOnLeft()) model.getAlien().left();
+            case (5): // left
+                if (!model.isTileOnLeft()) model.getAlien().left();
                 break;
         }
 
@@ -63,26 +62,32 @@ public class GameController extends Controller<Level>{
             model.getAlien().down();
         }
 
-        // move monsters
+        // Move monsters based on level's turning points
         Monster monster;
-        for(int j=0; j<20; j++){
-            for(int i=0; i<40; i++){
+        for (int j = 0; j < 20; j++) {
+            for (int i = 0; i < 40; i++) {
                 monster = model.getMonsters()[j][i];
-                if(monster != null){
+                if (monster != null) {
                     monster.move(model.getTurningPoints()[j]);
                 }
             }
         }
 
-        if(model.alienInShip()){
-            if(!model.nextLevel()){ // no more levels
-                // show score
+        // Check if the alien reaches the ship to move to the next level
+        if (model.alienInShip()) {
+            if (!model.nextLevel()) { // No more levels left
+                // Show the score or handle game over scenario
                 game.screen.close();
                 game.state = null;
             }
         }
-        if(model.checkCollision()){
-            model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt" );
+
+        // Check collision with crystals
+        model.checkCollisionWithCrystals();
+
+        // Check for collision with other hostile elements
+        if (model.checkCollision()) {
+            model.repopulateLevel();
         }
     }
 }
