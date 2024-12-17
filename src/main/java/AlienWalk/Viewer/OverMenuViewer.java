@@ -15,8 +15,7 @@ import java.io.IOException;
 
         public OverMenuViewer(TerminalScreen screen) throws IOException {
             super(screen);
-            // Initialize ElementViewer with the image you want to use
-            menuViewer = new ElementViewer("MainMenuImage.png");
+            menuViewer = new ElementViewer("OverMenuImage.png");
         }
 
         @Override
