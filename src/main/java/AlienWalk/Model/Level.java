@@ -34,10 +34,10 @@ public class Level {
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         crystals = new ArrayList<>(); // Initialize the crystal list
-        populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
+        populateLevel();
     }
 
-    public void populateLevel(String filePath){
+    public void populateLevel(){
         // Clear previous elements
         alien = new Alien(0,0);
         ship = new Ship(0,0);
@@ -46,7 +46,7 @@ public class Level {
         spikes = new Spike[height][width];
         crystals.clear(); // Clear any existing crystals
 
-        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream(filePath);
+        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
              InputStreamReader reader = new InputStreamReader(inputStream);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
@@ -99,6 +99,45 @@ public class Level {
         }
     }
 
+    // Moves alien and monster to starting positions,
+    // Does not respawn crystals
+    // (used in case of hostile collision)
+    public void repopulateLevel(){
+        alien = new Alien(0,0);
+        monsters = new Monster[height][width];
+
+        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
+             InputStreamReader reader = new InputStreamReader(inputStream);
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+            int character;
+            int i = 0;
+            int j = 0;
+            while ((character = bufferedReader.read()) != -1) {
+                switch((char) character){
+                    case '\n':
+                        j += 1;
+                        i = 0;
+                        break;
+                    case 'A':
+                        this.alien.getPosition().setY(j);
+                        this.alien.getPosition().setX(i);
+                        i += 1;
+                        break;
+                    case 'M': // monster
+                        this.monsters[j][i] = new Monster(i,j);
+                        i += 1;
+                        break;
+                    default:
+                        i += 1;
+                        break;
+                }
+            }
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean alienInShip(){
         return ship.collidesWith(this.alien);
     }
@@ -108,7 +147,7 @@ public class Level {
         if(which > MAX_LEVEL){
             return false; // no more levels
         }
-        populateLevel("Levels/Level" + String.valueOf(which) + ".txt" );
+        populateLevel();
         return true;
     }
 

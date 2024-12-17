@@ -86,7 +86,7 @@ public class GameController extends Controller<Level> {
 
         // Check for collision with other hostile elements
         if (model.checkCollision()) {
-            model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt");
+            model.repopulateLevel();
         }
 
     }
