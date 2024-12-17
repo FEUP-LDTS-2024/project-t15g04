@@ -81,19 +81,10 @@ public class GameController extends Controller<Level> {
             }
         }
 
-        // Check for collision with the environment (spikes, etc.)
-        if (model.checkCollisionWithSpikes()) {
-            // Transition to the OverMenuState after game over
-            try {
-                game.state = new OverMenuState(game); // Set the new state to OverMenuState
-            } catch (IOException e) {
-                game.screen.close(); // Close the screen if an error occurs
-                game.state = null; // Reset the game state
-            }
-            return; // Exit after transitioning to the OverMenuState
-        }
+        // Check collision with crystals
+        model.checkCollisionWithCrystals();
 
-        // Check for collision with other elements (if needed)
+        // Check for collision with other hostile elements
         if (model.checkCollision()) {
             model.populateLevel("Levels/Level" + String.valueOf(model.which) + ".txt");
         }

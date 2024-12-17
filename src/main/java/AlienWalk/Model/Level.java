@@ -196,9 +196,9 @@ public class Level {
     }
 
     public boolean checkCollision(){
-        return (checkCollisionWithSpikes() || checkCollisionWithMonsters() || checkCollisionWithCrystals());
+        return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
     }
-    public boolean checkCollisionWithCrystals() {
+    public void checkCollisionWithCrystals() {
         Iterator<Crystal> iterator = crystals.iterator();
         while (iterator.hasNext()) {
             Crystal crystal = iterator.next();
@@ -207,7 +207,6 @@ public class Level {
                 break;
             }
         }
-        return false;
     }
 
     public boolean checkCollisionWithSpikes() {
