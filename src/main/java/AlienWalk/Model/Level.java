@@ -21,7 +21,7 @@ public class Level {
     private TurningPoint[][] turningPoints;
     private Ship ship;
     private List<Crystal> crystals; // New list to hold crystals
-    private static final int MAX_LEVEL = 1;
+    private static final int MAX_LEVEL = 5;
 
     public Level(){
         which = 1;
