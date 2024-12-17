@@ -18,8 +18,8 @@ public class GameController extends Controller<Level>{
     @Override
     public void processInput(int inputOption, Game game, Level model) throws IOException {
         // Handle user inputs
-        switch (inputOption) {
-            case (0): // esc
+        switch(inputOption){
+            case(0): // esc
                 game.screen.close();
                 game.state = null;
                 break;
@@ -38,13 +38,16 @@ public class GameController extends Controller<Level>{
                 }
                 break;
             case(3): // up
-                if(model.isTileBelow()) model.getAlien().start_jump();
+                if(model.isTileBelow()){
+                    model.getAlien().start_jump();
+                    hittedTile = false;
+                }
                 break;
-            case (4): // right
-                if (!model.isTileOnRight()) model.getAlien().right();
+            case(4): // right
+                if(!model.isTileOnRight()) model.getAlien().right();
                 break;
-            case (5): // left
-                if (!model.isTileOnLeft()) model.getAlien().left();
+            case(5): //left
+                if(!model.isTileOnLeft()) model.getAlien().left();
                 break;
         }
 
