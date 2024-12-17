@@ -15,7 +15,7 @@ public class Monster extends Element{
             this.right();
             if(turningPoints[this.getPosition().getX()] != null && justTurned <= 0){
                 goingRight = false;
-                justTurned = 4;
+                justTurned = 5;
             }
         }
         else{
