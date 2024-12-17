@@ -79,9 +79,13 @@ public class GameController extends Controller<Level>{
         // Check if the alien reaches the ship to move to the next level
         if (model.alienInShip()) {
             if (!model.nextLevel()) { // No more levels left
-                // Show the score or handle game over scenario
-                game.screen.close();
-                game.state = null;
+                // Transition to the OverMenuState after game over
+                try {
+                    game.state = new OverMenuState(game); // Set the new state to OverMenuState
+                } catch (IOException e) {
+                    game.screen.close(); // Close the screen if an error occurs
+                    game.state = null; // Reset the game state
+                }
             }
         }
 
