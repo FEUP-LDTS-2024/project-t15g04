@@ -2,10 +2,14 @@ package AlienWalk.Viewer;
 
 import AlienWalk.Model.Level;
 import AlienWalk.Model.Elements.Crystal;
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.Terminal;
 
+
+import java.awt.*;
 import java.io.IOException;
 
 public class GameViewer extends Viewer<Level> {
@@ -18,6 +22,7 @@ public class GameViewer extends Viewer<Level> {
     private ElementViewer tile2Viewer;
     private ElementViewer crystalViewer; // New viewer for crystals
     private int score;  // Field to store the score
+    private Level level;
 
     public GameViewer(TerminalScreen screen) throws IOException {
         super(screen);

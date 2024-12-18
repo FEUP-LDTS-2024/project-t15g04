@@ -22,6 +22,7 @@ public class Level {
     private Ship ship;
     private List<Crystal> crystals; // New list to hold crystals
     private static final int MAX_LEVEL = 5;
+    private int score = 0;
 
     public Level(){
         which = 1;
@@ -242,10 +243,15 @@ public class Level {
         while (iterator.hasNext()) {
             Crystal crystal = iterator.next();
             if (crystal.collidesWith(alien)) {
+                score = score + 1;
                 iterator.remove();
                 break;
             }
         }
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public boolean checkCollisionWithSpikes() {
