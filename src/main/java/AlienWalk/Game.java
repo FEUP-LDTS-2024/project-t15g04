@@ -16,6 +16,8 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -52,10 +54,23 @@ public class Game {
                     .setForceAWTOverSwing(true)
                     .createTerminal();
 
-//            TerminalSize terminalSize = new TerminalSize(40, 20);
-//            DefaultTerminalFactory terminalFactory = new
-//                    DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-//            Terminal terminal = terminalFactory.createTerminal();
+            AWTTerminalFrame frame = (AWTTerminalFrame) terminal;
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    // Cleanup and exit
+                    try {
+                        if (screen != null) {
+                            screen.stopScreen();
+                        }
+                        terminal.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.exit(0);
+                }
+            });
+
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
