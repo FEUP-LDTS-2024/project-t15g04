@@ -89,4 +89,11 @@ public class Game {
             state.step(this);
         }
     }
+
+    public void end(){
+        try{
+            this.screen.close();
+        } catch (IOException ignored){}
+        this.state = null;
+    }
 }

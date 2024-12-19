@@ -16,12 +16,11 @@ public class GameController extends Controller<Level>{
     private boolean hittedTile = false;
 
     @Override
-    public void processInput(int inputOption, Game game, Level model) throws IOException {
+    public void processInput(int inputOption, Game game, Level model){
         // Handle user inputs
         switch(inputOption){
             case(0): // esc
-                game.screen.close();
-                game.state = null;
+                game.end();
                 break;
             case(1): // up right
                 if(!model.isTileOnRight()) model.getAlien().right();
@@ -78,8 +77,7 @@ public class GameController extends Controller<Level>{
                 try {
                     game.state = new OverMenuState(game); // Set the new state to OverMenuState
                 } catch (IOException e) {
-                    game.screen.close(); // Close the screen if an error occurs
-                    game.state = null; // Reset the game state
+                    game.end();
                 }
             }
         }
