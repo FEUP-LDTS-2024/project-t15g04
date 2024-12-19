@@ -15,8 +15,8 @@ public class Level {
     private int width;
     private int height;
     private Alien alien;
-    private Monster[][] monsters;
-    private Spike [][] spikes;
+    private List<Monster> monsters;
+    private List<Spike> spikes;
     private Tile[][] tiles;
     private TurningPoint[][] turningPoints;
     private Ship ship;
@@ -29,8 +29,8 @@ public class Level {
         height = 20;
         alien = new Alien(0,0);
         ship = new Ship(0,0);
-        monsters = new Monster[height][width];
-        spikes = new Spike[height][width];
+        monsters = new ArrayList<>();
+        spikes = new ArrayList<>();
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         crystals = new ArrayList<>(); // Initialize the crystal list
@@ -41,9 +41,10 @@ public class Level {
         // Clear previous elements
         alien = new Alien(0,0);
         ship = new Ship(0,0);
-        monsters = new Monster[height][width];
+        monsters = new ArrayList<>();
         tiles = new Tile[height][width];
-        spikes = new Spike[height][width];
+        turningPoints = new TurningPoint[height][width];
+        spikes = new ArrayList<>();
         crystals.clear(); // Clear any existing crystals
 
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
@@ -77,7 +78,7 @@ public class Level {
                         i += 1;
                         break;
                     case 'M': // monster
-                        this.monsters[j][i] = new Monster(i,j);
+                        this.monsters.add(new Monster(i,j));
                         i += 1;
                         break;
                     case 'P': // turning point
@@ -85,7 +86,7 @@ public class Level {
                         i += 1;
                         break;
                     case 'K': // spike
-                        this.spikes[j][i] = new Spike(i, j);
+                        this.spikes.add(new Spike(i, j));
                         i += 1;
                         break;
                     case 'C': // crystal (new symbol for crystal)
@@ -104,7 +105,7 @@ public class Level {
     // (used in case of hostile collision)
     public void repopulateLevel(){
         alien = new Alien(0,0);
-        monsters = new Monster[height][width];
+        monsters = new ArrayList<>();
 
         try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
              InputStreamReader reader = new InputStreamReader(inputStream);
@@ -125,7 +126,7 @@ public class Level {
                         i += 1;
                         break;
                     case 'M': // monster
-                        this.monsters[j][i] = new Monster(i,j);
+                        this.monsters.add(new Monster(i,j));
                         i += 1;
                         break;
                     default:
@@ -159,11 +160,11 @@ public class Level {
         return ship;
     }
 
-    public Monster[][] getMonsters() {
+    public List<Monster> getMonsters() {
         return monsters;
     }
 
-    public Spike[][] getSpikes() {
+    public List<Spike> getSpikes() {
         return spikes;
     }
 
@@ -240,8 +241,7 @@ public class Level {
     public void checkCollisionWithCrystals() {
         Iterator<Crystal> iterator = crystals.iterator();
         while (iterator.hasNext()) {
-            Crystal crystal = iterator.next();
-            if (crystal.collidesWith(alien)) {
+            if (iterator.next().collidesWith(alien)) {
                 iterator.remove();
                 break;
             }
@@ -249,26 +249,18 @@ public class Level {
     }
 
     public boolean checkCollisionWithSpikes() {
-        for(int i=0;i<40;i++){
-            for(int j=0;j<20;j++){
-                if(spikes[j][i] != null){
-                    if(spikes[j][i].collidesWith(this.alien)){
-                        return true;
-                    }
-                }
+        for(Spike spike : spikes){
+            if(spike.collidesWith(alien)){
+                return true;
             }
         }
         return false;
     }
 
     private boolean checkCollisionWithMonsters() {
-        for(int i=0;i<40;i++){
-            for(int j=0;j<20;j++){
-                if(monsters[j][i] != null){
-                    if(monsters[j][i].collidesWith(this.alien)){
-                        return true;
-                    }
-                }
+        for(Monster monster : monsters){
+            if(monster.collidesWith(alien)){
+                return true;
             }
         }
         return false;

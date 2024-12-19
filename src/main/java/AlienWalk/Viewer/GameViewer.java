@@ -1,5 +1,7 @@
 package AlienWalk.Viewer;
 
+import AlienWalk.Model.Elements.Monster;
+import AlienWalk.Model.Elements.Spike;
 import AlienWalk.Model.Level;
 import AlienWalk.Model.Elements.Crystal;
 import com.googlecode.lanterna.TextColor;
@@ -7,6 +9,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class GameViewer extends Viewer<Level> {
     private TextGraphics textGraphics;
@@ -84,28 +87,21 @@ public class GameViewer extends Viewer<Level> {
         }
 
         // Draw monsters
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 20; j++) {
-                if (model.getMonsters()[j][i] != null) {
-                    monsterViewer.draw(model.getMonsters()[j][i].getPosition(),
-                            model.getMonsters()[j][i].getTransitionX(),
-                            model.getMonsters()[j][i].getTransitionY(),
-                            this.textGraphics);
-                }
-            }
+        for(Monster monster : model.getMonsters()){
+            monsterViewer.draw(monster.getPosition(),
+                    monster.getTransitionX(),
+                    monster.getTransitionY(),
+                    this.textGraphics);
         }
 
+
         // Draw spikes
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 20; j++) {
-                if (model.getSpikes()[j][i] != null) {
-                    spikeViewer.draw(model.getSpikes()[j][i].getPosition(),
-                            model.getSpikes()[j][i].getTransitionX(),
-                            model.getSpikes()[j][i].getTransitionY(),
-                            this.textGraphics);
-                }
-            }
+        for(Spike spike : model.getSpikes()){
+            spikeViewer.draw(spike.getPosition(),
+                    0,0,
+                    this.textGraphics);
         }
+
 
         // Draw crystals
         for (Crystal crystal : model.getCrystals()) {

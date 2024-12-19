@@ -51,7 +51,7 @@ public class GameController extends Controller<Level>{
                 break;
         }
 
-    if(model.getAlien().getJumpState()>0){ // alien going up until possible
+        if(model.getAlien().getJumpState()>0){ // alien going up until possible
             if(model.isTileAbove()){
                 hittedTile = true;
             }
@@ -66,15 +66,10 @@ public class GameController extends Controller<Level>{
         }
 
         // Move monsters based on level's turning points
-        Monster monster;
-        for (int j = 0; j < 20; j++) {
-            for (int i = 0; i < 40; i++) {
-                monster = model.getMonsters()[j][i];
-                if (monster != null) {
-                    monster.move(model.getTurningPoints()[j]);
-                }
-            }
+        for(Monster monster : model.getMonsters()){
+            monster.move(model.getTurningPoints()[monster.getPosition().getY()]);
         }
+
 
         // Check if the alien reaches the ship to move to the next level
         if (model.alienInShip()) {
