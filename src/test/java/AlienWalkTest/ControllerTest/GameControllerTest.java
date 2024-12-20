@@ -1,18 +1,13 @@
-package AlienWalkTest.Controller;
+package AlienWalkTest.ControllerTest;
 import AlienWalk.Controller.GameController;
 import AlienWalk.Game;
 import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
-import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Elements.TurningPoint;
 import AlienWalk.Model.Level;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 

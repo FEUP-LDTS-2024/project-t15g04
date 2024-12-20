@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Level {
-    public int which; // in constructor
-    private int width;
-    private int height;
+    private int which; // in constructor
+    private final int width;
+    private final int height;
     private Alien alien;
     private List<Monster> monsters;
     private List<Spike> spikes;
@@ -37,25 +37,26 @@ public class Level {
         populateLevel();
     }
 
-    public void populateLevel(){
+    public void populateLevel() {
         // Clear previous elements
-        alien = new Alien(0,0);
-        ship = new Ship(0,0);
+        alien = new Alien(0, 0);
+        ship = new Ship(0, 0);
         monsters = new ArrayList<>();
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         spikes = new ArrayList<>();
         crystals.clear(); // Clear any existing crystals
 
-        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
+        try {
+            InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
              InputStreamReader reader = new InputStreamReader(inputStream);
-             BufferedReader bufferedReader = new BufferedReader(reader)) {
+             BufferedReader bufferedReader = new BufferedReader(reader);
 
             int character;
             int i = 0;
             int j = 0;
             while ((character = bufferedReader.read()) != -1) {
-                switch((char) character){
+                switch ((char) character) {
                     case '\n':
                         j += 1;
                         i = 0;
@@ -64,7 +65,7 @@ public class Level {
                         i += 1;
                         break;
                     case 'T':
-                        this.tiles[j][i] = new Tile(i,j);
+                        this.tiles[j][i] = new Tile(i, j);
                         i += 1;
                         break;
                     case 'A':
@@ -78,11 +79,11 @@ public class Level {
                         i += 1;
                         break;
                     case 'M': // monster
-                        this.monsters.add(new Monster(i,j));
+                        this.monsters.add(new Monster(i, j));
                         i += 1;
                         break;
                     case 'P': // turning point
-                        this.turningPoints[j][i] = new TurningPoint(i,j);
+                        this.turningPoints[j][i] = new TurningPoint(i, j);
                         i += 1;
                         break;
                     case 'K': // spike
@@ -95,7 +96,8 @@ public class Level {
                         break;
                 }
             }
-        } catch (IOException | NullPointerException e) {
+        }
+        catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -107,9 +109,10 @@ public class Level {
         alien = new Alien(0,0);
         monsters = new ArrayList<>();
 
-        try (InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
-             InputStreamReader reader = new InputStreamReader(inputStream);
-             BufferedReader bufferedReader = new BufferedReader(reader)) {
+        try {
+            InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(reader);
 
             int character;
             int i = 0;
@@ -288,5 +291,17 @@ public class Level {
     }
     public void alienStartJump(){
         alien.startJump();
+    }
+    public int getWhich(){
+        return which;
+    }
+    public void setWhich(int number){
+        if(number <= MAX_LEVEL) which = number;
+    }
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
     }
 }

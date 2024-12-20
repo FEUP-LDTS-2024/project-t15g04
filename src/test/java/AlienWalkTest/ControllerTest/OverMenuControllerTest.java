@@ -1,9 +1,7 @@
-package AlienWalkTest.Controller;
+package AlienWalkTest.ControllerTest;
 
-import AlienWalk.Controller.MenuController;
 import AlienWalk.Controller.OverMenuController;
 import AlienWalk.Game;
-import AlienWalk.Model.Menu;
 import AlienWalk.Model.OverMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
