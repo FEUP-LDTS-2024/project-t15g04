@@ -12,36 +12,34 @@ import java.io.IOException;
 
 public class MenuController extends Controller<Menu>{
     @Override
-    public void processInput(int inputOption, Game game, Menu model) throws IOException {
+    public void processInput(int inputOption, Game game, Menu model) {
         switch(inputOption){
             case 2: // down
-                model.setCurrent(Menu.Option.next(model.getCurrent()));
+                model.nextOption();
                 break;
             case 1: // up
-                model.setCurrent(Menu.Option.previous(model.getCurrent()));
+                model.previousOption();
                 break;
             case 3: // enter
                 switch (model.getCurrent()){
                     case Start:
-                        game.state = new GameState(new Level(),new GameViewer(game.screen), new GameController());
+                        game.setState(new GameState(new Level(),new GameViewer(game.screen), new GameController()));
                         break;
                     case Settings:
                         // To DO?
                         break;
                     case Quit:
-                        game.screen.close();
-                        game.state = null;
+                        game.end();
                         break;
                     default:
                         break;
                 }
                 break;
             case(0): // esc
-                game.screen.close();
-                game.state = null;
+                game.end();
                 break;
             default:
-                   break;
+                break;
 
         }
     }

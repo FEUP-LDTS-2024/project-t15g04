@@ -32,4 +32,11 @@ public class Menu {
     public Option getCurrent() {
         return current;
     }
+
+    public void nextOption(){
+        this.setCurrent(Menu.Option.next(this.current));
+    }
+    public void previousOption(){
+        this.setCurrent(Menu.Option.previous(this.current));
+    }
 }

@@ -22,16 +22,20 @@ public class GameViewer extends Viewer<Level> {
     private ElementViewer crystalViewer; // New viewer for crystals
     private int score;  // Field to store the score
 
-    public GameViewer(TerminalScreen screen) throws IOException {
+    public GameViewer(TerminalScreen screen) {
         super(screen);
         this.textGraphics = screen.newTextGraphics();
-        tileViewer = new ElementViewer("ElementsImages/Tile.png");
-        alienViewer = new ElementViewer("ElementsImages/Alien.png");
-        monsterViewer = new ElementViewer("ElementsImages/Monster.png");
-        spikeViewer = new ElementViewer("ElementsImages/Spike.png");
-        shipViewer = new ElementViewer("ElementsImages/Ship.png");
-        tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
-        crystalViewer = new ElementViewer("ElementsImages/Crystal.png"); // Initialize crystal viewer
+        try {
+            tileViewer = new ElementViewer("ElementsImages/Tile.png");
+            alienViewer = new ElementViewer("ElementsImages/Alien.png");
+            monsterViewer = new ElementViewer("ElementsImages/Monster.png");
+            spikeViewer = new ElementViewer("ElementsImages/Spike.png");
+            shipViewer = new ElementViewer("ElementsImages/Ship.png");
+            tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
+            crystalViewer = new ElementViewer("ElementsImages/Crystal.png"); // Initialize crystal viewer
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.score = 0;  // Initialize the score
     }
 
