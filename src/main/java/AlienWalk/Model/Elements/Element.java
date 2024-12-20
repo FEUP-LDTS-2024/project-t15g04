@@ -8,8 +8,8 @@ public class Element {
     private Position position; //top left corner
     private int transition_x;
     private int transition_y;
-    private static final int X_TRANSMISSION_STEP = 2;
-    private static final int Y_TRANSMISSION_STEP = 2;
+    public static final int X_TRANSMISSION_STEP = 2;
+    public static final int Y_TRANSMISSION_STEP = 2;
 
     public Element(int x, int y){
         this.position = new Position(x,y);
