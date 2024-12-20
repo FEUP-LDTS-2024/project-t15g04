@@ -265,4 +265,28 @@ public class Level {
         }
         return false;
     }
+
+    // Alien functions added do Level to make
+    // using mocks easier (GameController uses this instead of .getAlien().smh)
+    public void alienLeft(){
+        alien.left();
+    }
+    public void alienRight(){
+        alien.right();
+    }
+    public void alienUp(){
+        alien.up();
+    }
+    public void alienDown(){
+        alien.down();
+    }
+    public int alienGetJumpState(){
+        return alien.getJumpState();
+    }
+    public void alienSetJumpState(int newJumpState) {
+        alien.setJumpState(newJumpState);
+    }
+    public void alienStartJump(){
+        alien.startJump();
+    }
 }

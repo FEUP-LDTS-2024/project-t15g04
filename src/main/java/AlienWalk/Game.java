@@ -94,6 +94,10 @@ public class Game {
         try{
             this.screen.close();
         } catch (IOException ignored){}
-        this.state = null;
+        this.setState(null);
+    }
+
+    public void setState(State state){
+        this.state = state;
     }
 }

@@ -20,7 +20,7 @@ public class Alien extends Element {
         jumpState = newJumpState;
     }
 
-    public void start_jump(){
+    public void startJump(){
         jumpState = START_JUMP_STATE;
     }
 

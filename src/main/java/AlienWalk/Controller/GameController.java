@@ -23,45 +23,47 @@ public class GameController extends Controller<Level>{
                 game.end();
                 break;
             case(1): // up right
-                if(!model.isTileOnRight()) model.getAlien().right();
+                if(!model.isTileOnRight()) model.alienRight();
                 if(model.isTileBelow()){
-                    model.getAlien().start_jump();
+                    model.alienStartJump();
                     hittedTile = false;
                 }
                 break;
             case(2): // up left
-                if(!model.isTileOnLeft()) model.getAlien().left();
+                if(!model.isTileOnLeft()) model.alienLeft();
                 if(model.isTileBelow()){
-                    model.getAlien().start_jump();
+                    model.alienStartJump();
                     hittedTile = false;
                 }
                 break;
             case(3): // up
                 if(model.isTileBelow()){
-                    model.getAlien().start_jump();
+                    model.alienStartJump();
                     hittedTile = false;
                 }
                 break;
             case(4): // right
-                if(!model.isTileOnRight()) model.getAlien().right();
+                if(!model.isTileOnRight()) model.alienRight();
                 break;
             case(5): //left
-                if(!model.isTileOnLeft()) model.getAlien().left();
+                if(!model.isTileOnLeft()) model.alienLeft();
                 break;
+            default:
+                // do nothing (for testing, will not occur during game)
         }
 
-        if(model.getAlien().getJumpState()>0){ // alien going up until possible
+        if(model.alienGetJumpState() > 0){ // alien going up until possible
             if(model.isTileAbove()){
                 hittedTile = true;
             }
             else if(!hittedTile){
-                model.getAlien().up();
+                model.alienUp();
             }
-        model.getAlien().setJumpState(model.getAlien().getJumpState() - 1);
+        model.alienSetJumpState(model.alienGetJumpState() - 1);
         }
 
-        if(model.getAlien().getJumpState() == 0 && !(model.isTileBelow())){ // alien falling
-            model.getAlien().down();
+        if(model.alienGetJumpState() == 0 && !(model.isTileBelow())){ // alien falling
+            model.alienDown();
         }
 
         // Move monsters based on level's turning points
@@ -75,7 +77,7 @@ public class GameController extends Controller<Level>{
             if (!model.nextLevel()) { // No more levels left
                 // Transition to the OverMenuState after game over
                 try {
-                    game.state = new OverMenuState(game); // Set the new state to OverMenuState
+                    game.setState(new OverMenuState(game)); // Set the new state to OverMenuState
                 } catch (IOException e) {
                     game.end();
                 }
