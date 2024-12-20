@@ -1,25 +1,27 @@
 package AlienWalkTest.Controller;
 
 import AlienWalk.Controller.MenuController;
+import AlienWalk.Controller.OverMenuController;
 import AlienWalk.Game;
 import AlienWalk.Model.Menu;
+import AlienWalk.Model.OverMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
 
-public class MenuControllerTest {
-    private MenuController mc;
+public class OverMenuControllerTest {
+    private OverMenuController mc;
     private Game game;
-    private Menu menu;
+    private OverMenu menu;
 
     @BeforeEach
     public void setUp(){
-        mc = new MenuController();
+        mc = new OverMenuController();
         game = Mockito.mock(Game.class);
-        menu = Mockito.mock(Menu.class);
+        menu = Mockito.mock(OverMenu.class);
     }
 
     @Test
@@ -39,8 +41,7 @@ public class MenuControllerTest {
         mc.processInput(0, game, menu);
         verify(game, times(1)).end();
     }
-
-//    Cant test with mocks bc screen is null
+    //    Cant test with mocks bc screen is null
 //    @Test
 //    public void processEnterStart(){
 //        when(menu.getCurrent()).thenReturn(Menu.Option.Start);
@@ -50,18 +51,9 @@ public class MenuControllerTest {
 
     @Test
     public void processEnterQuit(){
-        when(menu.getCurrent()).thenReturn(Menu.Option.Quit);
+        when(menu.getCurrent()).thenReturn(OverMenu.Option.Quit);
         mc.processInput(3, game, menu);
         verify(game, times(1)).end();
-    }
-
-    @Test
-    public void processEnterSettings(){
-        when(menu.getCurrent()).thenReturn(Menu.Option.Settings);
-        mc.processInput(3, game, menu);
-        verify(game, never()).end();
-        verify(menu, never()).nextOption();
-        verify(menu, never()).previousOption();
     }
 
     @Test
@@ -71,5 +63,4 @@ public class MenuControllerTest {
         verify(menu, never()).nextOption();
         verify(menu, never()).previousOption();
     }
-
 }

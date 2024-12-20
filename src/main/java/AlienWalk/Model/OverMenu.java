@@ -32,5 +32,12 @@ public class OverMenu {
     public Option getCurrent() {
         return current;
     }
+
+    public void nextOption(){
+        this.setCurrent(OverMenu.Option.next(this.current));
+    }
+    public void previousOption(){
+        this.setCurrent(OverMenu.Option.previous(this.current));
+    }
 }
 

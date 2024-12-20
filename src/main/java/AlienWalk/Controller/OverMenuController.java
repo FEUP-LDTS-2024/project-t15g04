@@ -11,14 +11,14 @@ import java.io.IOException;
 public class OverMenuController extends Controller<OverMenu> {
 
     @Override
-    public void processInput(int inputOption, Game game, OverMenu model) throws IOException {
+    public void processInput(int inputOption, Game game, OverMenu model) {
         // Handle input
         switch (inputOption) {
             case 2: // down
-                model.setCurrent(OverMenu.Option.next(model.getCurrent()));
+                model.nextOption();
                 break;
             case 1: // up
-                model.setCurrent(OverMenu.Option.previous(model.getCurrent()));
+                model.previousOption();
                 break;
             case 3: // enter
                 switch (model.getCurrent()) {
@@ -28,20 +28,12 @@ public class OverMenuController extends Controller<OverMenu> {
                         break;
                     case Quit:
                         // Quit the game
-                        try {
-                            game.screen.close();
-                        } catch (IOException e) {
-                        }
-                        game.state = null;
+                        game.end();
                         break;
                 }
                 break;
             case 0: // esc
-                try {
-                    game.screen.close();
-                } catch (IOException e) {
-                }
-                game.state = null;
+                game.end();
                 break;
         }
     }
