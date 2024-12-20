@@ -1,11 +1,15 @@
 package AlienWalkTest.ModelTest;
 
+import AlienWalk.Model.Elements.Alien;
+import AlienWalk.Model.Elements.Crystal;
 import AlienWalk.Model.Elements.Tile;
 import AlienWalk.Model.Level;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
@@ -247,5 +251,72 @@ public class LevelTest {
         level.getAlien().up();
         boolean tmp = level.checkCollision();
         Assertions.assertTrue(tmp);
+    }
+
+    @Test
+    public void alienLeftTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienLeft();
+        Mockito.verify(level.getAlien()).left();
+    }
+
+    @Test
+    public void alienRightTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienRight();
+        Mockito.verify(level.getAlien()).right();
+    }
+
+    @Test
+    public void alienUpTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienUp();
+        Mockito.verify(level.getAlien()).up();
+    }
+
+    @Test
+    public void alienDownTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienDown();
+        Mockito.verify(level.getAlien()).down();
+    }
+
+    @Test
+    public void alienGetJumpStateTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienGetJumpState();
+        Mockito.verify(level.getAlien()).getJumpState();
+    }
+
+    @Test
+    public void alienSetJumpStateTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienSetJumpState(1);
+        Mockito.verify(level.getAlien()).setJumpState(1);
+    }
+
+    @Test
+    public void alienStartJumpTest(){
+        level.setAlien(Mockito.mock(Alien.class));
+        level.alienStartJump();
+        Mockito.verify(level.getAlien()).startJump();
+    }
+
+    @Test
+    public void checkCollisionsWithCrystalsTest(){
+        Crystal crystal1 = Mockito.mock(Crystal.class);
+        Crystal crystal2 = Mockito.mock(Crystal.class);
+        Mockito.when(crystal1.collidesWith(level.getAlien())).thenReturn(true);
+        Mockito.when(crystal2.collidesWith(level.getAlien())).thenReturn(false);
+        level.getCrystals().add(crystal1);
+        level.getCrystals().add(crystal2);
+
+        level.checkCollisionWithCrystals();
+
+        Mockito.verify(crystal1).collidesWith(level.getAlien());
+        Mockito.verify(crystal2).collidesWith(level.getAlien());
+
+        Assertions.assertFalse(level.getCrystals().contains(crystal1));
+        Assertions.assertTrue(level.getCrystals().contains(crystal2));
     }
 }

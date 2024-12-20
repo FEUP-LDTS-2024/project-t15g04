@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Level {
@@ -159,6 +158,11 @@ public class Level {
         return alien;
     }
 
+    // For testing purposes
+    public void setAlien(Alien newAlien){
+        this.alien = newAlien;
+    }
+
     public Ship getShip(){
         return ship;
     }
@@ -242,13 +246,7 @@ public class Level {
         return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
     }
     public void checkCollisionWithCrystals() {
-        Iterator<Crystal> iterator = crystals.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().collidesWith(alien)) {
-                iterator.remove();
-                break;
-            }
-        }
+        crystals.removeIf(crystal -> crystal.collidesWith(alien));
     }
 
     public boolean checkCollisionWithSpikes() {
