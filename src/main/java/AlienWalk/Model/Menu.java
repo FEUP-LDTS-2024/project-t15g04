@@ -20,7 +20,7 @@ public class Menu {
             };
         }
     }
-    Option current;
+    private Option current;
 
     public Menu(){
         current = Option.Start;
@@ -34,9 +34,9 @@ public class Menu {
     }
 
     public void nextOption(){
-        this.setCurrent(Menu.Option.next(this.current));
+        current = (Menu.Option.next(current));
     }
     public void previousOption(){
-        this.setCurrent(Menu.Option.previous(this.current));
+        current = (Menu.Option.previous(current));
     }
 }
