@@ -80,8 +80,172 @@ public class LevelTest {
         Assertions.assertEquals(3, level.getMonsters().get(0).getPosY());
     }
 
+    // SMH WRONG!!!
     @Test
-    public void shipCollidesTest(
+    public void shipCollidesTest(){
+        level.setWhich(3);
+        boolean tmp = level.alienInShip();
+//        Assertions.assertFalse(tmp);
+        level.alienRight();
+        tmp = level.alienInShip();
+        Assertions.assertTrue(tmp);
+    }
 
-    )
+    @Test
+    public void nextLevelTest(){
+        boolean tmp = level.nextLevel();
+        Assertions.assertTrue(tmp);
+        Assertions.assertEquals(2, level.getWhich());
+        level.setWhich(5);
+        tmp = level.nextLevel();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileAboveTest(){
+        level.setWhich(4);
+        level.populateLevel();
+        boolean tmp = level.isTileAbove();
+        Assertions.assertTrue(tmp);
+    }
+
+    @Test
+    public void isTileBelowTest(){
+        level.setWhich(4);
+        level.populateLevel();
+        boolean tmp = level.isTileBelow();
+        Assertions.assertTrue(tmp);
+    }
+    @Test
+    public void isTileOnLeftTest(){
+        level.setWhich(4);
+        level.populateLevel();
+        boolean tmp = level.isTileOnLeft();
+        Assertions.assertTrue(tmp);
+    }
+    @Test
+    public void isTileOnRightTest(){
+        level.setWhich(4);
+        level.populateLevel();
+        boolean tmp = level.isTileOnRight();
+        Assertions.assertTrue(tmp);
+    }
+
+    @Test
+    public void isTileAboveTestWithTransition1(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(2);
+        boolean tmp = level.isTileAbove();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileAboveTestWithTransition2(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(-2);
+        boolean tmp = level.isTileAbove();
+        Assertions.assertFalse(tmp);
+
+    }
+
+    @Test
+    public void isTileBelowTestWithTransition1(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(2);
+        boolean tmp = level.isTileBelow();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileBelowTestWithTransition2(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(-2);
+        boolean tmp = level.isTileBelow();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnLeftTestWithTransition1(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionY(2);
+        boolean tmp = level.isTileOnLeft();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnLeftTestWithTransition2(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionY(-2);
+        boolean tmp = level.isTileOnLeft();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnLeftTestWithTransition3(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(2);
+        boolean tmp = level.isTileOnLeft();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnRightTestWithTransition(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionY(2);
+        boolean tmp = level.isTileOnRight();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnRightTestWithTransition2(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionY(-2);
+        boolean tmp = level.isTileOnRight();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void isTileOnRightTestWithTransition3(){
+        level.setWhich(5);
+        level.populateLevel();
+        level.getAlien().setTransitionX(-2);
+        boolean tmp = level.isTileOnRight();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void checkCollisionTest(){
+        level.setWhich(5);
+        level.populateLevel();
+        boolean tmp = level.checkCollision();
+        Assertions.assertFalse(tmp);
+    }
+
+    @Test
+    public void checkCollisionTest2(){
+        level.setWhich(6);
+        level.populateLevel();
+        level.getAlien().down();
+        level.getAlien().down();
+        boolean tmp = level.checkCollision();
+        Assertions.assertTrue(tmp);
+    }
+
+    @Test
+    public void checkCollisionTest3(){
+        level.setWhich(6);
+        level.populateLevel();
+        level.getAlien().up();
+        boolean tmp = level.checkCollision();
+        Assertions.assertTrue(tmp);
+    }
 }

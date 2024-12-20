@@ -295,8 +295,9 @@ public class Level {
     public int getWhich(){
         return which;
     }
+    // just for tests so number can be bigger than MAX_LEVEL
     public void setWhich(int number){
-        if(number <= MAX_LEVEL) which = number;
+        which = number;
     }
     public int getWidth(){
         return width;
