@@ -36,15 +36,24 @@ We decided to design our game according to MVC design patter. As consequence our
 * MenuViewer: Manages rendering of the game menu on the screen.
 * Viewer: A base class for all viewer-related functionality in the game.
 
-[Link to UML](docs/images/AlienWalkUML.png)
+## Structure
+<p align="center">
+  <img src="docs/images/AlienWalkUML.png"/>
+</p>
 
 ## Mockups:
 
-[Level Map Mockup 1](docs/images/mockup1.png)
+## Mockup 1
+<p align="center">
+  <img src="docs/images/mockup1.png"/>
+</p>
 
-[Level Map Mockup 2](docs/images/mockup2.png)
+## Mockup 2
+<p align="center">
+  <img src="docs/images/mockup2.png"/>
+</p>
 
-[Main Menu Mockup](docs/images/mockup3.png)
-
-
-
+## Mockup 3
+<p align="center">
+  <img src="docs/images/mockup3.png"/>
+</p>
