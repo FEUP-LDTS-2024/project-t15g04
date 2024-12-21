@@ -32,7 +32,6 @@ public class ElementViewer {
                     TextCharacter c = new TextCharacter(' ', new TextColor.RGB(red, green, blue), new TextColor.RGB(red, green, blue));
                     tg.setCharacter(position.getX()*image.getWidth() + transitionX + x, position.getY()*image.getHeight() + transitionY + y, c);
                 }
-                //need to add what if getRGB = null (spikes)
             }
         }
     }

@@ -23,15 +23,11 @@ public class OverMenuStateTest {
     private Game game;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws IOException{
         model = Mockito.mock(OverMenu.class);
         overMenuViewer = Mockito.mock(OverMenuViewer.class);
         overMenuController = Mockito.mock(OverMenuController.class);
-        try {
-            overMenuState = new OverMenuState(model, overMenuController, overMenuViewer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        overMenuState = new OverMenuState(model, overMenuController, overMenuViewer);
         game = Mockito.mock(Game.class);
     }
 
