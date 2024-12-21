@@ -1,9 +1,9 @@
 package AlienWalkTest.ViewerTest;
 
-import AlienWalk.Model.Level;
 import AlienWalk.Model.Menu;
-import AlienWalk.Viewer.GameViewer;
+import AlienWalk.Model.OverMenu;
 import AlienWalk.Viewer.MenuViewer;
+import AlienWalk.Viewer.OverMenuViewer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -17,8 +17,8 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.spy;
 
-public class MenuViewerTest {
-    private MenuViewer menuViewer;
+public class OverMenuViewerTest {
+    private OverMenuViewer menuViewer;
     private TerminalScreen screen;
     private TerminalScreen ts;
 
@@ -38,7 +38,7 @@ public class MenuViewerTest {
         catch (IOException ignored) {}
 
         ts = spy(new TerminalScreen(screen.getTerminal()));
-        menuViewer = new MenuViewer(ts);
+        menuViewer = new OverMenuViewer(ts);
     }
 
     @Test
@@ -82,8 +82,10 @@ public class MenuViewerTest {
 
     @Test
     public void testDraw1() throws IOException {
-        Menu model = spy(new Menu());
+        OverMenu model = spy(new OverMenu());
         menuViewer.draw(model);
+
+        Mockito.verify(model).getCurrent();
 
         Mockito.verify(ts).clear();
         Mockito.verify(ts).newTextGraphics();
@@ -93,20 +95,8 @@ public class MenuViewerTest {
 
     @Test
     public void testDraw2() throws IOException {
-        Menu model = spy(new Menu());
-        Mockito.when(model.getCurrent()).thenReturn(Menu.Option.Settings);
-        menuViewer.draw(model);
-
-        Mockito.verify(ts).clear();
-        Mockito.verify(ts).newTextGraphics();
-        Mockito.verify(model).getCurrent();
-        Mockito.verify(ts).refresh();
-    }
-
-    @Test
-    public void testDraw3() throws IOException {
-        Menu model = spy(new Menu());
-        Mockito.when(model.getCurrent()).thenReturn(Menu.Option.Quit);
+        OverMenu model = spy(new OverMenu());
+        Mockito.when(model.getCurrent()).thenReturn(OverMenu.Option.Quit);
         menuViewer.draw(model);
 
         Mockito.verify(ts).clear();

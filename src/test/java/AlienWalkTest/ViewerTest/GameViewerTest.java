@@ -1,29 +1,17 @@
 package AlienWalkTest.ViewerTest;
 
-import AlienWalk.Controller.MenuController;
 import AlienWalk.Model.Level;
-import AlienWalk.Model.Menu;
-import AlienWalk.States.MenuState;
 import AlienWalk.Viewer.GameViewer;
-import AlienWalk.Viewer.MenuViewer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -117,20 +105,14 @@ public class GameViewerTest {
 
         gameViewer.draw(level);
 
+        Mockito.verify(ts).newTextGraphics();
         Mockito.verify(ts).clear();
-
         Mockito.verify(level, times(3)).getAlien();
-
         Mockito.verify(level, times(3)).getShip();
-
         Mockito.verify(level).getTiles();
-
         Mockito.verify(level).getMonsters();
-
         Mockito.verify(level).getSpikes();
-
         Mockito.verify(level).getCrystals();
-
         Mockito.verify(ts).refresh();
     }
 }

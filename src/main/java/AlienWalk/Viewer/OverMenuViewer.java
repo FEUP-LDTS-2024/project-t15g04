@@ -11,7 +11,7 @@ import java.io.IOException;
 
     public class OverMenuViewer extends Viewer<OverMenu> {
 
-        private ElementViewer menuViewer;
+        private final ElementViewer menuViewer;
 
         public OverMenuViewer(TerminalScreen screen) throws IOException {
             super(screen);

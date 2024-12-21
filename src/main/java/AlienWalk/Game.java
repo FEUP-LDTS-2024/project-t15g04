@@ -75,13 +75,9 @@ public class Game {
             screen.setCursorPosition(null);
             screen.startScreen();
             screen.doResizeIfNecessary();
-
             this.state = new MenuState(new Menu(), new MenuController(), new MenuViewer(screen));
         }
-        catch (IOException ignored) {}
-        catch (FontFormatException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        catch (IOException | FontFormatException | URISyntaxException ignored) {}
     }
 
     public void run(){
