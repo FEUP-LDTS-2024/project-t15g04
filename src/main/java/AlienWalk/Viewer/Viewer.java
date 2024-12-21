@@ -32,24 +32,6 @@ public abstract class Viewer<T> {
 
     public abstract int read();
 
-    public KeyStroke poll() {
-        KeyStroke k;
-        try {
-            k = this.screen.pollInput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return k;
-    }
-
-    public void flushInput() throws IOException {
-        KeyStroke key;
-        // Continuously poll until no input is left
-        while ((key = screen.pollInput()) != null) {
-            // Optionally, process or log the flushed keys
-        }
-    }
-
     // maybe change according to strategy pattern?
     public class MyKeyAdapter implements KeyListener{
 
