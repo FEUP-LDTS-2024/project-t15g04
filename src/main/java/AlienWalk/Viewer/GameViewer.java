@@ -2,6 +2,7 @@ package AlienWalk.Viewer;
 
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Spike;
+import AlienWalk.Model.Elements.Tile;
 import AlienWalk.Model.Level;
 import AlienWalk.Model.Elements.Crystal;
 import com.googlecode.lanterna.TextColor;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class GameViewer extends Viewer<Level> {
-    private TextGraphics textGraphics;
+    private final TextGraphics textGraphics;
     private ElementViewer tileViewer;
     private ElementViewer alienViewer;
     private ElementViewer monsterViewer;
@@ -33,9 +34,7 @@ public class GameViewer extends Viewer<Level> {
             shipViewer = new ElementViewer("ElementsImages/Ship.png");
             tile2Viewer = new ElementViewer("ElementsImages/Tile2.png");
             crystalViewer = new ElementViewer("ElementsImages/Crystal.png"); // Initialize crystal viewer
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
         this.score = 0;  // Initialize the score
     }
 
@@ -55,7 +54,7 @@ public class GameViewer extends Viewer<Level> {
         screen.clear();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#00de80"));
 
-        // Draw the score at the top-left corner of the screen
+        // Draw the score in the top-left corner of the screen
         textGraphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
         textGraphics.putString(1, 1, "Score: " + score);  // Display score
 
@@ -72,18 +71,19 @@ public class GameViewer extends Viewer<Level> {
                 this.textGraphics);
 
         // Draw tiles
+        Tile[][] tmp = model.getTiles();
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 20; j++) {
-                if (model.getTiles()[j][i] != null) {
-                    if (j == 0 || model.getTiles()[j - 1][i] == null) { // no block over -> grass
-                        tileViewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransitionX(),
-                                model.getTiles()[j][i].getTransitionY(),
+                if (tmp[j][i] != null) {
+                    if (j == 0 || tmp[j - 1][i] == null) { // no block over -> grass
+                        tileViewer.draw(tmp[j][i].getPosition(),
+                                tmp[j][i].getTransitionX(),
+                                tmp[j][i].getTransitionY(),
                                 this.textGraphics);
                     } else {
-                        tile2Viewer.draw(model.getTiles()[j][i].getPosition(),
-                                model.getTiles()[j][i].getTransitionX(),
-                                model.getTiles()[j][i].getTransitionY(),
+                        tile2Viewer.draw(tmp[j][i].getPosition(),
+                                tmp[j][i].getTransitionX(),
+                                tmp[j][i].getTransitionY(),
                                 this.textGraphics);
                     }
                 }
@@ -116,7 +116,6 @@ public class GameViewer extends Viewer<Level> {
 
         try {
             screen.refresh();
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
     }
 }

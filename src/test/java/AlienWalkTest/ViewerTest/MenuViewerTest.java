@@ -1,7 +1,9 @@
 package AlienWalkTest.ViewerTest;
 
 import AlienWalk.Model.Level;
+import AlienWalk.Model.Menu;
 import AlienWalk.Viewer.GameViewer;
+import AlienWalk.Viewer.MenuViewer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -14,10 +16,9 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 
-public class GameViewerTest {
-    private GameViewer gameViewer;
+public class MenuViewerTest {
+    private MenuViewer menuViewer;
     private TerminalScreen screen;
     private TerminalScreen ts;
 
@@ -37,82 +38,80 @@ public class GameViewerTest {
         catch (IOException ignored) {}
 
         ts = spy(new TerminalScreen(screen.getTerminal()));
-        gameViewer = new GameViewer(ts);
+        menuViewer = new MenuViewer(ts);
     }
 
     @Test
     public void testRead1(){
         int tmp;
-        tmp = gameViewer.read();
+        tmp = menuViewer.read();
         Assertions.assertEquals(-1, tmp);
     }
 
     @Test
     public void testRea2(){
         int tmp;
-        gameViewer.setQuit(true);
-        tmp = gameViewer.read();
+        menuViewer.setQuit(true);
+        tmp = menuViewer.read();
         Assertions.assertEquals(0, tmp);
     }
 
     @Test
     public void testRead3(){
         int tmp;
-        gameViewer.setUp(true);
-        gameViewer.setRight(true);
-        tmp = gameViewer.read();
+        menuViewer.setUp(true);
+        tmp = menuViewer.read();
         Assertions.assertEquals(1, tmp);
     }
 
     @Test
     public void testRead4(){
         int tmp;
-        gameViewer.setUp(true);
-        gameViewer.setLeft(true);
-        tmp = gameViewer.read();
+        menuViewer.setDown(true);
+        tmp = menuViewer.read();
         Assertions.assertEquals(2, tmp);
     }
 
     @Test
     public void testRead5(){
         int tmp;
-        gameViewer.setUp(true);
-        tmp = gameViewer.read();
+        menuViewer.setEnter(true);
+        tmp = menuViewer.read();
         Assertions.assertEquals(3, tmp);
     }
 
     @Test
-    public void testRead6(){
-        int tmp;
-        gameViewer.setRight(true);
-        tmp = gameViewer.read();
-        Assertions.assertEquals(4, tmp);
-    }
+    public void testDraw1() throws IOException {
+        Menu model = spy(new Menu());
+        menuViewer.draw(model);
 
-    @Test
-    public void testRead7(){
-        int tmp;
-        gameViewer.setLeft(true);
-        tmp = gameViewer.read();
-        Assertions.assertEquals(5, tmp);
-    }
-
-    @Test
-    public void testDraw() throws IOException {
-        Level level = spy(new Level());
-        level.setWhich(7);
-        level.populateLevel();
-
-        gameViewer.draw(level);
-
-        Mockito.verify(ts).newTextGraphics();
         Mockito.verify(ts).clear();
-        Mockito.verify(level, times(3)).getAlien();
-        Mockito.verify(level, times(3)).getShip();
-        Mockito.verify(level).getTiles();
-        Mockito.verify(level).getMonsters();
-        Mockito.verify(level).getSpikes();
-        Mockito.verify(level).getCrystals();
+        Mockito.verify(ts).newTextGraphics();
+        Mockito.verify(model).getCurrent();
+        Mockito.verify(ts).refresh();
+    }
+
+    @Test
+    public void testDraw2() throws IOException {
+        Menu model = spy(new Menu());
+        Mockito.when(model.getCurrent()).thenReturn(Menu.Option.Settings);
+        menuViewer.draw(model);
+
+        Mockito.verify(ts).clear();
+        Mockito.verify(ts).newTextGraphics();
+        Mockito.verify(model).getCurrent();
+        Mockito.verify(ts).refresh();
+    }
+
+    @Test
+    public void testDraw3() throws IOException {
+        Menu model = spy(new Menu());
+        Mockito.when(model.getCurrent()).thenReturn(Menu.Option.Quit);
+        menuViewer.draw(model);
+
+        Mockito.verify(ts).clear();
+        Mockito.verify(ts).newTextGraphics();
+        Mockito.verify(model).getCurrent();
         Mockito.verify(ts).refresh();
     }
 }
