@@ -89,4 +89,28 @@ public abstract class Viewer<T> {
             }
         }
     }
+
+    // setters for testing
+    public void setUp(boolean x){
+        up = x;
+    }
+    public void setDown(boolean x){
+        down = x;
+    }
+    public void setLeft(boolean x){
+        left = x;
+    }
+    public void setRight(boolean x){
+        right = x;
+    }
+    public void setJump(boolean x){
+        jump = x;
+    }
+    public void setEnter(boolean x){
+        enter = x;
+    }
+    public void setQuit(boolean x){
+        quit = x;
+    }
+
 }
