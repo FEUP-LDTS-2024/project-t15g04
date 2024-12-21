@@ -1,9 +1,7 @@
 package AlienWalk.Model.Elements;
 
 public class Alien extends Element {
-    int jumpState;
-    private final int START_JUMP_STATE = 18;
-
+    private int jumpState = 0;
     // New fields for crystal collection
     private int collectedCrystals = 0; // Counter for collected crystals
 
@@ -21,7 +19,7 @@ public class Alien extends Element {
     }
 
     public void startJump(){
-        jumpState = START_JUMP_STATE;
+        jumpState = 18;
     }
 
     // Methods for collecting crystals

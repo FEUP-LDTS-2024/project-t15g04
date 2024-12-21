@@ -5,8 +5,10 @@ import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Level;
+import AlienWalk.Model.OverMenu;
 import AlienWalk.Viewer.GameViewer;
 import AlienWalk.States.OverMenuState;
+import AlienWalk.Viewer.OverMenuViewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -77,10 +79,8 @@ public class GameController extends Controller<Level>{
             if (!model.nextLevel()) { // No more levels left
                 // Transition to the OverMenuState after game over
                 try {
-                    game.setState(new OverMenuState(game)); // Set the new state to OverMenuState
-                } catch (IOException e) {
-                    game.end();
-                }
+                    game.setState(new OverMenuState(new OverMenu(), new OverMenuController(), new OverMenuViewer(game.screen))); // Set the new state to OverMenuState
+                } catch (IOException ignored) {}
             }
         }
 

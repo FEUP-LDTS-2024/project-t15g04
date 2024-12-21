@@ -26,8 +26,7 @@ public class MenuState extends State<Menu>{
         int inputOption = viewer.read();
         try {
             controller.processInput(inputOption, game, model);
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
 
         // Ensure the loop runs every 100 ms
         long elapsedTime = System.currentTimeMillis() - startTime;

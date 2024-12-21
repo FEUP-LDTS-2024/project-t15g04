@@ -22,7 +22,7 @@ public class Monster extends Element{
             this.left();
             if(turningPoints[this.getPosition().getX()] != null && justTurned <= 0){
                 goingRight = true;
-                justTurned = 4;
+                justTurned = 5;
             }
         }
         justTurned -= 1;
