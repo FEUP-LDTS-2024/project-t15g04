@@ -39,15 +39,15 @@ We decided to design our game according to MVC design patter. As consequence our
 
 ## Mockup 1
 <p align="center">
-  <img src="docs/images/mockup1.png"/>
+  <img src="docs/images/Menu.png"/>
 </p>
 
 ## Mockup 2
 <p align="center">
-  <img src="docs/images/mockup2.png"/>
+  <img src="docs/images/Gameplay.png"/>
 </p>
 
 ## Mockup 3
 <p align="center">
-  <img src="docs/images/mockup3.png"/>
+  <img src="docs/images/OverMenu.png"/>
 </p>
