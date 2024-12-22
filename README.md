@@ -35,19 +35,22 @@ We decided to design our game according to MVC design patter. As consequence our
   <img src="docs/images/AlienWalkUML.png"/>
 </p>
 
-## Mockups:
-
-## Mockup 1
+## Main Menu
 <p align="center">
   <img src="docs/images/Menu.png"/>
 </p>
 
-## Mockup 2
+## Gameplay
 <p align="center">
   <img src="docs/images/Gameplay.png"/>
 </p>
 
-## Mockup 3
+## Over Menu
 <p align="center">
   <img src="docs/images/OverMenu.png"/>
+</p>
+
+## Coverage Table
+<p align="center">
+  <img src="docs/images/CoverageTable.png"/>
 </p>
