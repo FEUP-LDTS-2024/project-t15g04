@@ -1,13 +1,10 @@
 package AlienWalk.States;
 
-import AlienWalk.Controller.Controller;
 import AlienWalk.Controller.MenuController;
 import AlienWalk.Game;
 import AlienWalk.Model.Menu;
 import AlienWalk.Viewer.MenuViewer;
 
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 

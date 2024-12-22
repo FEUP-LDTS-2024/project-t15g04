@@ -1,14 +1,11 @@
 package AlienWalk;
 
 import AlienWalk.Controller.MenuController;
-import AlienWalk.Model.Level;
 import AlienWalk.Model.Menu;
 import AlienWalk.States.MenuState;
 import AlienWalk.States.State;
 import AlienWalk.Viewer.MenuViewer;
-import AlienWalk.Viewer.Viewer;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -22,12 +19,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 public class Game {
     public State state;
     public TerminalScreen screen;
+    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         Game game = new Game();
         game.run();
     }
@@ -65,7 +64,7 @@ public class Game {
                         }
                         terminal.close();
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        LOGGER.severe(ex.getMessage());
                     }
                     System.exit(0);
                 }

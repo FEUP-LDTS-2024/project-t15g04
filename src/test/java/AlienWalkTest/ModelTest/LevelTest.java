@@ -2,13 +2,11 @@ package AlienWalkTest.ModelTest;
 
 import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Crystal;
-import AlienWalk.Model.Elements.Tile;
 import AlienWalk.Model.Level;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;

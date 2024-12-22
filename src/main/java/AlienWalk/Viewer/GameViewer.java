@@ -10,7 +10,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 public class GameViewer extends Viewer<Level> {
     private final TextGraphics textGraphics;
@@ -20,8 +19,8 @@ public class GameViewer extends Viewer<Level> {
     private ElementViewer spikeViewer;
     private ElementViewer shipViewer;
     private ElementViewer tile2Viewer;
-    private ElementViewer crystalViewer; // New viewer for crystals
-    private int score;  // Field to store the score
+    private ElementViewer crystalViewer;
+    private final int score;
 
     public GameViewer(TerminalScreen screen) {
         super(screen);

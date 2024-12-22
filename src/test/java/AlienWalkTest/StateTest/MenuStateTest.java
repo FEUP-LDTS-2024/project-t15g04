@@ -3,7 +3,6 @@ package AlienWalkTest.StateTest;
 import AlienWalk.Controller.MenuController;
 import AlienWalk.Game;
 import AlienWalk.Model.Menu;
-import AlienWalk.States.GameState;
 import AlienWalk.States.MenuState;
 import AlienWalk.Viewer.MenuViewer;
 import org.junit.jupiter.api.BeforeEach;

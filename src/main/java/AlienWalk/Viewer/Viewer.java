@@ -1,14 +1,10 @@
 package AlienWalk.Viewer;
 
-import com.googlecode.lanterna.screen.Screen;
-
-import  com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -102,9 +98,6 @@ public abstract class Viewer<T> {
     }
     public void setRight(boolean x){
         right = x;
-    }
-    public void setJump(boolean x){
-        jump = x;
     }
     public void setEnter(boolean x){
         enter = x;

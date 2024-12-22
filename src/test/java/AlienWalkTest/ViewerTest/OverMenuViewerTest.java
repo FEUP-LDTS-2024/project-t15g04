@@ -1,8 +1,6 @@
 package AlienWalkTest.ViewerTest;
 
-import AlienWalk.Model.Menu;
 import AlienWalk.Model.OverMenu;
-import AlienWalk.Viewer.MenuViewer;
 import AlienWalk.Viewer.OverMenuViewer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.TerminalScreen;

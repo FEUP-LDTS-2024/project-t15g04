@@ -1,13 +1,9 @@
 package AlienWalkTest.StateTest;
 
-import AlienWalk.Controller.MenuController;
 import AlienWalk.Controller.OverMenuController;
 import AlienWalk.Game;
-import AlienWalk.Model.Menu;
 import AlienWalk.Model.OverMenu;
-import AlienWalk.States.MenuState;
 import AlienWalk.States.OverMenuState;
-import AlienWalk.Viewer.MenuViewer;
 import AlienWalk.Viewer.OverMenuViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

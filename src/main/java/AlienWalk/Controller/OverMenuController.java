@@ -6,7 +6,6 @@ import AlienWalk.Model.Level;
 import AlienWalk.States.GameState;
 import AlienWalk.Viewer.GameViewer;
 
-import java.io.IOException;
 
 public class OverMenuController extends Controller<OverMenu> {
 

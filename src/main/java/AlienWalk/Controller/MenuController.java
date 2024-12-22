@@ -5,10 +5,7 @@ import AlienWalk.Model.Level;
 import AlienWalk.Model.Menu;
 import AlienWalk.States.GameState;
 import AlienWalk.Viewer.GameViewer;
-import com.googlecode.lanterna.input.KeyStroke;
 
-import javax.imageio.IIOException;
-import java.io.IOException;
 
 public class MenuController extends Controller<Menu>{
     @Override

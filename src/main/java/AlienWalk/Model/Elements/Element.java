@@ -2,10 +2,9 @@ package AlienWalk.Model.Elements;
 
 import static java.lang.Math.abs;
 
-import static java.lang.Math.abs;
 
 public class Element {
-    private Position position; //top left corner
+    private final Position position; //top left corner
     private int transition_x;
     private int transition_y;
     public static final int X_TRANSMISSION_STEP = 2;

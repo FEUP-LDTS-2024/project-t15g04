@@ -1,6 +1,5 @@
 package AlienWalkTest.ModelTest;
 
-import AlienWalk.Model.Menu;
 import AlienWalk.Model.OverMenu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

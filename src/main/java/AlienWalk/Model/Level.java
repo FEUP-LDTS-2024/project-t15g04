@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Level {
     private int which; // in constructor
@@ -19,7 +20,8 @@ public class Level {
     private Tile[][] tiles;
     private TurningPoint[][] turningPoints;
     private Ship ship;
-    private List<Crystal> crystals; // New list to hold crystals
+    private final List<Crystal> crystals;
+    private static final Logger LOGGER = Logger.getLogger(Level.class.getName());
     private static final int MAX_LEVEL = 5;
 
     public Level(){
@@ -46,11 +48,12 @@ public class Level {
         spikes = new ArrayList<>();
         crystals.clear(); // Clear any existing crystals
 
-        try {
-            InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
-             InputStreamReader reader = new InputStreamReader(inputStream);
-             BufferedReader bufferedReader = new BufferedReader(reader);
-
+        InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + which + ".txt");
+        if (inputStream == null) {
+            LOGGER.warning("Level file 'Levels/Level" + which + ".txt' not found.");
+            return;
+        }
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             int character;
             int i = 0;
             int j = 0;
@@ -89,15 +92,15 @@ public class Level {
                         this.spikes.add(new Spike(i, j));
                         i += 1;
                         break;
-                    case 'C': // crystal (new symbol for crystal)
-                        this.crystals.add(new Crystal(i, j)); // Add crystal to the list
+                    case 'C': // crystal
+                        this.crystals.add(new Crystal(i, j));
                         i += 1;
                         break;
                 }
             }
         }
         catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+            LOGGER.log(java.util.logging.Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -108,11 +111,13 @@ public class Level {
         alien = new Alien(0,0);
         monsters = new ArrayList<>();
 
-        try {
-            InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + String.valueOf(which) + ".txt");
-            InputStreamReader reader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+        InputStream inputStream = Level.class.getClassLoader().getResourceAsStream("Levels/Level" + which + ".txt");
+        if (inputStream == null) {
+            LOGGER.warning("Level file 'Levels/Level" + which + ".txt' not found.");
+            return;
+        }
 
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             int character;
             int i = 0;
             int j = 0;
@@ -137,7 +142,8 @@ public class Level {
                 }
             }
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+            LOGGER.log(java.util.logging.Level.SEVERE, e.getMessage(), e);
+
         }
     }
 

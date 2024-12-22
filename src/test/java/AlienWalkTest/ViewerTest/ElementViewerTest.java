@@ -2,7 +2,6 @@ package AlienWalkTest.ViewerTest;
 
 import AlienWalk.Model.Elements.Position;
 import AlienWalk.Viewer.ElementViewer;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,9 +23,7 @@ public class ElementViewerTest {
 
     @Test
     void testConstructorInvalidPath() {
-        assertThrows(NullPointerException.class, () -> {
-            new ElementViewer("invalid_path.png");
-        });
+        assertThrows(NullPointerException.class, () -> new ElementViewer("invalid_path.png"));
     }
 
     @Test

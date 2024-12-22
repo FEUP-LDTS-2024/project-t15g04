@@ -1,16 +1,11 @@
 package AlienWalk.Controller;
 
 import AlienWalk.Game;
-import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Monster;
-import AlienWalk.Model.Elements.Position;
 import AlienWalk.Model.Level;
 import AlienWalk.Model.OverMenu;
-import AlienWalk.Viewer.GameViewer;
 import AlienWalk.States.OverMenuState;
 import AlienWalk.Viewer.OverMenuViewer;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
