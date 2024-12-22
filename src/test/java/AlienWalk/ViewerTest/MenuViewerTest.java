@@ -1,4 +1,4 @@
-package AlienWalkTest.ViewerTest;
+package AlienWalk.ViewerTest;
 
 import AlienWalk.Model.Menu;
 import AlienWalk.Viewer.MenuViewer;

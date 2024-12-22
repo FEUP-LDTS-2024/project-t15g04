@@ -1,6 +1,5 @@
-package AlienWalkTest;
+package AlienWalk;
 
-import AlienWalk.Game;
 import org.junit.jupiter.api.Test;
 
 public class GameTest {
