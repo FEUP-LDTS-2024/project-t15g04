@@ -1,4 +1,4 @@
-package AlienWalkTest.ModelTest.ElementsTest;
+package AlienWalk.ModelTest.ElementsTest;
 
 import AlienWalk.Model.Elements.Monster;
 import AlienWalk.Model.Elements.TurningPoint;

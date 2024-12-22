@@ -1,4 +1,4 @@
-package AlienWalkTest.ModelTest;
+package AlienWalk.ModelTest;
 
 import AlienWalk.Model.Elements.Alien;
 import AlienWalk.Model.Elements.Crystal;

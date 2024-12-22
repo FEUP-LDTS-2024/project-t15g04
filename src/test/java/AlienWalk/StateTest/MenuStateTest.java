@@ -1,4 +1,4 @@
-package AlienWalkTest.StateTest;
+package AlienWalk.StateTest;
 
 import AlienWalk.Controller.MenuController;
 import AlienWalk.Game;

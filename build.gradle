@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 'edu.FEUP.ProjectSDAT'
@@ -8,6 +9,12 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+pitest {
+    junit5PluginVersion = '1.0.0'
+    targetClasses = ['AlienWalk.*'] // Replace with your package structure
+    targetTests = ['AlienWalk.*']
 }
 
 application{

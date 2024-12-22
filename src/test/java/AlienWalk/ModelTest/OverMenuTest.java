@@ -1,4 +1,4 @@
-package AlienWalkTest.ModelTest;
+package AlienWalk.ModelTest;
 
 import AlienWalk.Model.OverMenu;
 import org.junit.jupiter.api.Assertions;

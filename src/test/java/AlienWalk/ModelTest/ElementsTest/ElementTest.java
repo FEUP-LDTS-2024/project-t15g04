@@ -1,4 +1,4 @@
-package AlienWalkTest.ModelTest.ElementsTest;
+package AlienWalk.ModelTest.ElementsTest;
 
 import AlienWalk.Model.Elements.Element;
 import AlienWalk.Model.Elements.Position;
