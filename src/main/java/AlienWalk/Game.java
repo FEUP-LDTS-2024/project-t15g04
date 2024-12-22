@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 public class Game {
-    public State state;
+    public State<?> state;
     public TerminalScreen screen;
     private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
@@ -92,7 +92,7 @@ public class Game {
         this.setState(null);
     }
 
-    public void setState(State state){
+    public void setState(State<?> state){
         this.state = state;
     }
 }
