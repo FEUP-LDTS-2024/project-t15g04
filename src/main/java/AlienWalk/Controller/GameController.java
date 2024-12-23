@@ -74,7 +74,9 @@ public class GameController extends Controller<Level>{
             if (!model.nextLevel()) { // No more levels left
                 // Transition to the OverMenuState after game over
                 try {
-                    game.setState(new OverMenuState(new OverMenu(), new OverMenuController(), new OverMenuViewer(game.screen))); // Set the new state to OverMenuState
+                    game.setState(new OverMenuState(new OverMenu(),
+                            new OverMenuController(),
+                            new OverMenuViewer(game.screen, model.getScore()))); // Set the new state to OverMenuState
                 } catch (IOException ignored) {}
             }
         }

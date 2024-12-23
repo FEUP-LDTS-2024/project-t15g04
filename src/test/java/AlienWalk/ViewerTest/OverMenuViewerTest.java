@@ -36,7 +36,7 @@ public class OverMenuViewerTest {
         catch (IOException ignored) {}
 
         ts = spy(new TerminalScreen(screen.getTerminal()));
-        menuViewer = new OverMenuViewer(ts);
+        menuViewer = new OverMenuViewer(ts, 0);
     }
 
     @Test

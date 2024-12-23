@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class Level {
     private final List<Crystal> crystals;
     private static final Logger LOGGER = Logger.getLogger(Level.class.getName());
     private static final int MAX_LEVEL = 5;
+    private int score;
 
     public Level(){
         which = 1;
@@ -35,6 +37,7 @@ public class Level {
         tiles = new Tile[height][width];
         turningPoints = new TurningPoint[height][width];
         crystals = new ArrayList<>(); // Initialize the crystal list
+        score = 0;
         populateLevel();
     }
 
@@ -252,7 +255,14 @@ public class Level {
         return (checkCollisionWithSpikes() || checkCollisionWithMonsters());
     }
     public void checkCollisionWithCrystals() {
-        crystals.removeIf(crystal -> crystal.collidesWith(alien));
+        Iterator<Crystal> iterator = crystals.iterator();
+        while (iterator.hasNext()) {
+            Crystal crystal = iterator.next();
+            if (crystal.collidesWith(alien)) {
+                iterator.remove(); // Safe removal
+                score++;
+            }
+        }
     }
 
     public boolean checkCollisionWithSpikes() {
@@ -309,4 +319,6 @@ public class Level {
     public int getHeight(){
         return height;
     }
+
+    public int getScore() {return score;}
 }

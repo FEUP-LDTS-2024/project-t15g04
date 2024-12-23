@@ -12,10 +12,14 @@ import java.io.IOException;
     public class OverMenuViewer extends Viewer<OverMenu> {
 
         private final ElementViewer menuViewer;
+        private final ElementViewer scoreViewer;
+        private final ElementViewer numberViewer;
 
-        public OverMenuViewer(TerminalScreen screen) throws IOException {
+        public OverMenuViewer(TerminalScreen screen, int points) throws IOException {
             super(screen);
             menuViewer = new ElementViewer("OverMenuImage.png");
+            scoreViewer = new ElementViewer("Score.png");
+            numberViewer = new ElementViewer("Numbers/" + String.valueOf(points) + ".png");
         }
 
         @Override
@@ -35,6 +39,10 @@ import java.io.IOException;
 
             // Draw the background or image
             menuViewer.draw(new Position(0, 0), 0, 0, textGraphics);  // Drawing the background image at position (0,0)
+
+            // Draw 'score'
+            scoreViewer.draw(new Position(2,6), 17, 12, textGraphics);
+            numberViewer.draw(new Position(21,13), 0, 0, textGraphics);
 
             // Highlight the currently selected option
             switch (model.getCurrent()) {
