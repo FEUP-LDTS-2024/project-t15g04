@@ -47,7 +47,7 @@ We decided to design our game according to MVC design patter. As consequence our
 
 ## Over Menu
 <p align="center">
-  <img src="docs/images/OverMenu.png"/>
+  <img src="docs/images/OverMenuwithscore.png"/>
 </p>
 
 ## Coverage Table
