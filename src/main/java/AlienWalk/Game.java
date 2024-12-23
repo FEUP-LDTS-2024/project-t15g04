@@ -79,6 +79,7 @@ public class Game {
             screen.startScreen();
             screen.doResizeIfNecessary();
             this.state = new MenuState(new Menu(), new MenuController(), new MenuViewer(screen));
+            this.state = new OverMenuState(new OverMenu(), new OverMenuController(), new OverMenuViewer(screen, 3));
         }
         catch (IOException | FontFormatException | URISyntaxException ignored) {}
     }
