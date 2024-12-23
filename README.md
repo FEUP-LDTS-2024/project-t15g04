@@ -8,7 +8,7 @@ Our project is a 2d platformer game, similar to Super Mario. The main character 
 * GUI - Each element (ALien, monster, spike...) is nicely drawn.
 * Input - Game uses keyListeners making input smooth.
 * Enemies - Collision with spikes or moving monsters resets the level.
-* Collectible system - during the levels, the player is able collect crystals (points) what improves the score.
+* Collectible system - allows the player to collect crystals (points) during the levels, which improves the score. The score is then displayed in the OverMenu.
 
 ## Project Structure: TODO
 We decided to design our game according to MVC design patter. As consequence our code is divided in 4 main blocks ((model, viewer, controller) + state) with each of them responsible for different aspects of a game: 
