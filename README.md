@@ -94,7 +94,7 @@ We decided to design our game according to MVC design patter. As consequence our
 
 ## Coverage Report
 
-img
+<img src="docs/images/CoverageReport.png"/>
 
 **GameControllerTest -** This test suite validates the functionality of the GameController class, which manages user input and interactions within the game. It uses mocking to isolate dependencies like the Game and Level classes.
 
